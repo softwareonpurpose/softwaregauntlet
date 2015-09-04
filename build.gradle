@@ -1,0 +1,39 @@
+group 'craigstockton'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.apache.logging.log4j:log4j-api:2.3'
+    compile 'org.apache.logging.log4j:log4j-core:2.3'
+    compile group: 'org.testng', name: 'testng', version: '6.8.21'
+    compile 'org.seleniumhq.selenium:selenium-java:2.47.1'
+    compile files('./src/main/resources/validator4test-1.0.jar')
+    compile files('./src/main/resources/uinavigator-1.0.jar')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+
+test {
+    useTestNG()
+}
+
+task debug(type: Test) {
+    def groupsToInclude = []
+    def groupsToExclude = []
+
+    groupsToInclude.add('under_development')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
+    }
+}
