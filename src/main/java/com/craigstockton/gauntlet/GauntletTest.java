@@ -83,7 +83,7 @@ public abstract class GauntletTest {
         UiHost.quitInstance();
     }
 
-    public static UiHost getBrowser() {
+    public static UiHost getUiHost() {
         return UiHost.getInstance();
     }
 
