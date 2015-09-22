@@ -1,6 +1,6 @@
 package com.craigstockton.gauntlet;
 
-import com.craigstockton.uinavigator.BrowserHost;
+import com.craigstockton.uinavigator.UiHost;
 import com.craigstockton.validator4test.Validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +10,7 @@ import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
 
-public abstract class BaseTest {
+public abstract class GauntletTest {
 
     private final String className;
     private Logger logger;
@@ -19,7 +19,7 @@ public abstract class BaseTest {
     private static final int oneMinute = oneSecond * 60;
     protected static final int defaultTimeout = oneMinute * 1;  //  move the multiplier to a properties file
 
-    protected BaseTest() {
+    protected GauntletTest() {
         this.className = this.getClass().toString().replace("class ", "");
     }
 
@@ -37,7 +37,7 @@ public abstract class BaseTest {
      */
     public class Application {
 
-        //  protected final static String APPLICATION_NAME = "application name";
+        //  protected final static String APPLICATION_NAME = "[application name]";
     }
 
     /**
@@ -45,7 +45,7 @@ public abstract class BaseTest {
      */
     public class View {
 
-        //  protected final static String VIEW_NAME = "view name";
+        //  protected final static String VIEW_NAME = "[view name]";
     }
 
     /**
@@ -53,7 +53,7 @@ public abstract class BaseTest {
      */
     public class Database {
 
-        //  protected final static String DATABASE_NAME = "database name";
+        //  protected final static String DATABASE_NAME = "[database name]";
     }
 
     /**
@@ -61,7 +61,7 @@ public abstract class BaseTest {
      */
     public class Table {
 
-        //  protected static final String TABLE_NAME = "table name";
+        //  protected static final String TABLE_NAME = "[table name]";
     }
 
     public class Validatee {
@@ -80,11 +80,11 @@ public abstract class BaseTest {
     @AfterMethod(alwaysRun = true)
     public void terminateExecution() {
         getLogger().info(String.format("TERMINATING %s - %s%n", getTestClass(), testMethodName));
-        BrowserHost.quitInstance();
+        UiHost.quitInstance();
     }
 
-    public static BrowserHost getBrowser() {
-        return BrowserHost.getInstance();
+    public static UiHost getBrowser() {
+        return UiHost.getInstance();
     }
 
     protected void confirm(String testResult) {
