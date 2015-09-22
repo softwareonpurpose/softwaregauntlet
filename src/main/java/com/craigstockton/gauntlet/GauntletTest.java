@@ -23,7 +23,7 @@ public abstract class GauntletTest {
         this.className = this.getClass().toString().replace("class ", "");
     }
 
-    public class TestType {
+    protected class TestType {
 
         public static final String EVT = "evt";                 //  Environment Validation Test
         public static final String DEV = "under_development";   //  Test being developed and/or debugged
@@ -57,20 +57,12 @@ public abstract class GauntletTest {
     }
 
     /**
-     * Names of database Tables
-     */
-    public class Table {
-
-        //  protected static final String TABLE_NAME = "[table name]";
-    }
-
-    /**
      * Validation targets
      */
     public class Validatee {
 
         protected static final String VIEW = "view";
-        protected static final String DATA = "data";
+        protected static final String DATA_ENTITY = "[data_entity_name]";
     }
 
     @BeforeMethod(alwaysRun = true)
