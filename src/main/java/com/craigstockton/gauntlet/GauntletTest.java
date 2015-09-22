@@ -64,6 +64,9 @@ public abstract class GauntletTest {
         //  protected static final String TABLE_NAME = "[table name]";
     }
 
+    /**
+     * Validation targets
+     */
     public class Validatee {
 
         protected static final String VIEW = "view";
