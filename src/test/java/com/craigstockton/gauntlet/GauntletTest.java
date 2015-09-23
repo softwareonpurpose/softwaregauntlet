@@ -61,7 +61,7 @@ public abstract class GauntletTest {
      */
     public class Validatee {
 
-        protected static final String VIEW = "view";
+        public static final String VIEW = "view";
         protected static final String DATA_ENTITY = "[data_entity_name]";
     }
 
