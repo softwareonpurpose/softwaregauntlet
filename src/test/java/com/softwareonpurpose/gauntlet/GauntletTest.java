@@ -11,7 +11,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.*/
-package com.craigstockton.gauntlet;
+package com.softwareonpurpose.gauntlet;
 
 import com.craigstockton.uinavigator.UiHost;
 import com.craigstockton.validator4test.Validator;
@@ -50,7 +50,7 @@ public abstract class GauntletTest {
      */
     public class Application {
 
-        //  protected final static String APPLICATION_NAME = "[application name]";
+        //  public final static String APPLICATION_NAME = "[application name]";
     }
 
     /**
@@ -58,7 +58,7 @@ public abstract class GauntletTest {
      */
     public class View {
 
-        //  protected final static String VIEW_NAME = "[view name]";
+        //  public final static String VIEW_NAME = "[view name]";
     }
 
     /**
@@ -66,7 +66,7 @@ public abstract class GauntletTest {
      */
     public class Database {
 
-        //  protected final static String DATABASE_NAME = "[database name]";
+        //  public final static String DATABASE_NAME = "[database name]";
     }
 
     /**
@@ -75,7 +75,7 @@ public abstract class GauntletTest {
     public class Validatee {
 
         public static final String VIEW = "view";
-        protected static final String DATA_ENTITY = "[data_entity_name]";
+        public static final String DATA_ENTITY = "[data_entity_name]";
     }
 
     @BeforeMethod(alwaysRun = true)
@@ -89,10 +89,6 @@ public abstract class GauntletTest {
     public void terminateExecution() {
         getLogger().info(String.format("TERMINATING %s - %s%n", getTestClass(), testMethodName));
         UiHost.quitInstance();
-    }
-
-    public static UiHost getUiHost() {
-        return UiHost.getInstance();
     }
 
     protected void confirm(String testResult) {
