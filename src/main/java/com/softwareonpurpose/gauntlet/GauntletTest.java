@@ -50,6 +50,9 @@ public abstract class GauntletTest {
      */
     public class Application {
 
+        public static final String ISSWEB = "issweb";
+        public static final String ISSWEB_CHINA = "issweb_china";
+
         //  public final static String APPLICATION_NAME = "[application name]";
     }
 
@@ -57,6 +60,9 @@ public abstract class GauntletTest {
      * Names of Views from applications under test
      */
     public class View {
+
+        public static final String LANDING = "landing";
+        public static final String CHINA_LANDING = "china_landing";
 
         //  public final static String VIEW_NAME = "[view name]";
     }
@@ -81,18 +87,23 @@ public abstract class GauntletTest {
     @BeforeMethod(alwaysRun = true)
     public void beginExecution(Method method) {
         testMethodName = method.getName();
-        getLogger().info(String.format("EXECUTING %s - %s...", getTestClass(), testMethodName));
+        getLogger().info(String.format("EXECUTING %s - %s...", getTestClass(), getTestMethodName()));
         getLogger().info("STEPS:");
     }
 
     @AfterMethod(alwaysRun = true)
     public void terminateExecution() {
-        getLogger().info(String.format("TERMINATING %s - %s%n", getTestClass(), testMethodName));
+        getLogger().info(String.format("TERMINATING %s - %s%n", getTestClass(), getTestMethodName()));
         UiHost.quitInstance();
     }
 
     protected void confirm(String testResult) {
         Assert.assertTrue(testResult.equals(Validator.PASS), testResult);
+        getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n", getTestMethodName()));
+    }
+
+    private String getTestMethodName() {
+        return testMethodName;
     }
 
     private Logger getLogger() {
