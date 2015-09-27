@@ -14,15 +14,16 @@
 package com.softwareonpurpose.gauntlet;
 
 import com.craigstockton.uinavigator.UiRegion;
+import com.craigstockton.uinavigator.UiView;
 import com.craigstockton.validator4test.Validator;
 
 public abstract class ExpectedResult {
 
-    protected abstract Validator instantiateValidator();
+    protected abstract <T extends UiView> Validator instantiateValidator(T actual);
 
-    public String validate() {
+    public <T extends UiView> String validate(T actual) {
         UiRegion.suppressConstructionLogging(true);
-        String result = instantiateValidator().validate();
+        String result = instantiateValidator(actual).validate();
         UiRegion.suppressConstructionLogging(false);
         return result;
     }
