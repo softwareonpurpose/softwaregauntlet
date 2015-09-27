@@ -19,7 +19,7 @@ import com.craigstockton.validator4test.Validator;
 
 public abstract class ExpectedResult {
 
-    protected abstract <T extends UiView> Validator instantiateValidator(T actual);
+    protected abstract <T extends Validator> T instantiateValidator(Object actual);
 
     public <T extends UiView> String validate(T actual) {
         UiRegion.suppressConstructionLogging(true);
