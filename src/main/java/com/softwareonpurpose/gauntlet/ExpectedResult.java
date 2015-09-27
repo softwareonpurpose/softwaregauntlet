@@ -16,13 +16,13 @@ package com.softwareonpurpose.gauntlet;
 import com.craigstockton.uinavigator.UiRegion;
 import com.craigstockton.validator4test.Validator;
 
-public abstract class ExpectedView {
+public abstract class ExpectedResult {
 
-    protected Validator validator;
+    protected abstract Validator instantiateValidator();
 
-    protected String executeValidation() {
+    public String validate() {
         UiRegion.suppressConstructionLogging(true);
-        String result = validator.validate();
+        String result = instantiateValidator().validate();
         UiRegion.suppressConstructionLogging(false);
         return result;
     }
