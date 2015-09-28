@@ -28,10 +28,59 @@ test {
 }
 
 task debug(type: Test) {
+    String env = System.getProperty("env");
     def groupsToInclude = []
     def groupsToExclude = []
 
     groupsToInclude.add('under_development')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
+    }
+}
+
+task evt(type: Test) {
+    String env = System.getProperty("env");
+    def groupsToInclude = []
+    def groupsToExclude = []
+
+    groupsToInclude.add('evt')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
+    }
+}
+
+task sprint(type: Test) {
+    String env = System.getProperty("env");
+    def groupsToInclude = []
+    def groupsToExclude = []
+
+    groupsToInclude.add('sprint')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
+    }
+}
+
+task release(type: Test) {
+    String env = System.getProperty("env");
+    def groupsToInclude = []
+    def groupsToExclude = []
+
+    groupsToInclude.add('release')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
+    }
+}
+
+task production (type: Test) {
+    String env = System.getProperty("env");
+    def groupsToInclude = []
+    def groupsToExclude = []
+
+    groupsToInclude.add('production')
     useTestNG() {
         groupsToInclude.each { String group -> includeGroups group }
         groupsToExclude.each { String group -> excludeGroups group }
