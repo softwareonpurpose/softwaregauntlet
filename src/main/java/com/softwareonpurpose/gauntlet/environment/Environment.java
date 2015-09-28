@@ -11,7 +11,7 @@ public class Environment {
 
     public static EnvironmentDefinition getInstance() {
         if (environment == null) {
-            String environment = SystemProperties.getProperty("environment");
+            String environment = SystemProperties.getProperty("env");
             switch (environment) {
                 default:
                     Environment.environment = ProductionEnvironment.getInstance();
