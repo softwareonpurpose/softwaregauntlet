@@ -24,11 +24,11 @@ task wrapper(type: Wrapper) {
 }
 
 test {
-    useTestNG()
 }
 
 task debug(type: Test) {
-    String env = System.getProperty("env");
+    systemProperties['env'] = System.properties["env"]
+
     def groupsToInclude = []
     def groupsToExclude = []
 
@@ -40,7 +40,8 @@ task debug(type: Test) {
 }
 
 task evt(type: Test) {
-    String env = System.getProperty("env");
+    systemProperties['env'] = System.properties["env"]
+
     def groupsToInclude = []
     def groupsToExclude = []
 
@@ -52,7 +53,8 @@ task evt(type: Test) {
 }
 
 task sprint(type: Test) {
-    String env = System.getProperty("env");
+    systemProperties['env'] = System.properties["env"]
+
     def groupsToInclude = []
     def groupsToExclude = []
 
@@ -63,8 +65,14 @@ task sprint(type: Test) {
     }
 }
 
+task regression(type: Test) {
+    systemProperties['env'] = System.properties["env"]
+    useTestNG()
+}
+
 task release(type: Test) {
-    String env = System.getProperty("env");
+    systemProperties['env'] = System.properties["env"]
+
     def groupsToInclude = []
     def groupsToExclude = []
 
@@ -75,8 +83,9 @@ task release(type: Test) {
     }
 }
 
-task production (type: Test) {
-    String env = System.getProperty("env");
+task production(type: Test) {
+    systemProperties['env'] = System.properties["env"]
+
     def groupsToInclude = []
     def groupsToExclude = []
 
