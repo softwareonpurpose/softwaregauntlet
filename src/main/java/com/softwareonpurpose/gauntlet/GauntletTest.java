@@ -41,7 +41,7 @@ public abstract class GauntletTest {
         public static final String EVT = "evt";                 //  Environment Validation Test
         public static final String DEV = "under_development";   //  Test being developed and/or debugged
         public static final String PRODUCTION = "production";   //  Benign (alters NO source data) test executable in Production
-        public static final String RELEASE = "rvt";             //  Test critical to validating Release Readiness
+        public static final String RELEASE = "release";         //  Test critical to validating Release Readiness
         public static final String SPRINT = "sprint";           //  Test verifying acceptance criteria for current sprint
     }
 
@@ -50,9 +50,6 @@ public abstract class GauntletTest {
      */
     public class Application {
 
-        public static final String ISSWEB = "issweb";
-        public static final String ISSWEB_CHINA = "issweb_china";
-
         //  public final static String APPLICATION_NAME = "[application name]";
     }
 
@@ -60,9 +57,6 @@ public abstract class GauntletTest {
      * Names of Views from applications under test
      */
     public class View {
-
-        public static final String LANDING = "landing";
-        public static final String CHINA_LANDING = "china_landing";
 
         //  public final static String VIEW_NAME = "[view name]";
     }
