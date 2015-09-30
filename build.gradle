@@ -40,6 +40,21 @@ task debug(type: Test) {
     }
 }
 
+task bvt(type: Test) {
+    systemProperties['env'] = System.properties["env"]
+    maxParallelForks = 4
+
+    def groupsToInclude = []
+    def groupsToExclude = []
+
+    groupsToInclude.add('under_development')
+    groupsToInclude.add('evt')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
+    }
+}
+
 task evt(type: Test) {
     systemProperties['env'] = System.properties["env"]
     maxParallelForks = 4
