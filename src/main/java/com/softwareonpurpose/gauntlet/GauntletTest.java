@@ -14,7 +14,7 @@
 package com.softwareonpurpose.gauntlet;
 
 import com.craigstockton.uinavigator.UiHost;
-import com.craigstockton.validator4test.Validator;
+import com.softwareonpurpose.validator4test.Validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;

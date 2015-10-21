@@ -14,10 +14,9 @@
 package com.softwareonpurpose.gauntlet;
 
 import com.craigstockton.uinavigator.UiRegion;
-import com.craigstockton.validator4test.Validator;
+import com.softwareonpurpose.validator4test.Validator;
 
 public abstract class ExpectedResult {
-
     protected abstract <T extends Validator> T instantiateValidator(Object actual);
 
     public String validate(Object actual) {
