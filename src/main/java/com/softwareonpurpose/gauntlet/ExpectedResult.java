@@ -13,7 +13,7 @@
    limitations under the License.*/
 package com.softwareonpurpose.gauntlet;
 
-import com.craigstockton.uinavigator.UiRegion;
+import com.softwareonpurpose.uinavigator.UiRegion;
 import com.softwareonpurpose.validator4test.Validator;
 
 public abstract class ExpectedResult {

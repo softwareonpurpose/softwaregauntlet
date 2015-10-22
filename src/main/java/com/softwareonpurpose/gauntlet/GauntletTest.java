@@ -13,7 +13,7 @@
    limitations under the License.*/
 package com.softwareonpurpose.gauntlet;
 
-import com.craigstockton.uinavigator.UiHost;
+import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.validator4test.Validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
