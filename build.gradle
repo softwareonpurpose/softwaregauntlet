@@ -16,7 +16,7 @@ dependencies {
     compile 'org.testng:testng:6.8.21'
     compile 'org.seleniumhq.selenium:selenium-java:2.47.1'
     compile 'com.jayway.restassured:rest-assured:2.7.0'
-    compile files('./src/main/resources/validator4test-1.0.jar')
+    compile files('./src/main/resources/validator4test-1.0.1.jar')
     compile files('./src/main/resources/uinavigator-1.0.jar')
 }
 
