@@ -1,4 +1,4 @@
-group 'com.softwareonpurpose'
+group 'com.teksystemsgs'
 version '0.0.1-SNAPSHOT'
 
 apply plugin: 'java'
@@ -15,7 +15,8 @@ dependencies {
     compile 'org.apache.logging.log4j:log4j-core:2.3'
     compile 'org.testng:testng:6.8.21'
     compile 'org.seleniumhq.selenium:selenium-java:2.47.1'
-    compile 'com.jayway.restassured:rest-assured:2.7.0'
+    compile 'org.jboss.resteasy:resteasy-jaxrs:3.1.1.Final'
+    compile 'org.jboss.resteasy:resteasy-client:3.1.1.Final'
     compile files('./src/main/resources/validator4test-0.0.1.jar')
     compile files('./src/main/resources/uinavigator-1.0.jar')
 }
