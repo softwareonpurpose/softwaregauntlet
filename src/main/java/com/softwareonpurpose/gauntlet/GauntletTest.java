@@ -15,8 +15,8 @@ package com.softwareonpurpose.gauntlet;
 
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.validator4test.Validator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -25,15 +25,48 @@ import java.lang.reflect.Method;
 
 public abstract class GauntletTest {
 
-    private final String className;
-    private Logger logger;
-    private String testMethodName;
     private static final int oneSecond = 1000;
     private static final int oneMinute = oneSecond * 60;
     protected static final int defaultTimeout = oneMinute * 1;  //  move the multiplier to a properties file
+    private final String className;
+    private Logger logger;
+    private String testMethodName;
 
     protected GauntletTest() {
         this.className = this.getClass().toString().replace("class ", "");
+    }
+
+    @BeforeMethod(alwaysRun = true)
+    public void beginExecution(Method method) {
+        testMethodName = method.getName();
+        getLogger().info(String.format("EXECUTING %s - %s...", getTestClass(), getTestMethodName()));
+        getLogger().info("STEPS:");
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void terminateExecution() {
+        getLogger().info(String.format("TERMINATING %s - %s%n", getTestClass(), getTestMethodName()));
+        UiHost.quitInstance();
+    }
+
+    protected void confirm(String testResult) {
+        Assert.assertTrue(testResult.equals(Validator.PASS), testResult);
+        getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n", getTestMethodName()));
+    }
+
+    private String getTestMethodName() {
+        return testMethodName;
+    }
+
+    private Logger getLogger() {
+        if (logger == null) {
+            logger = LoggerFactory.getLogger(getTestClass());
+        }
+        return logger;
+    }
+
+    private String getTestClass() {
+        return className;
     }
 
     protected class TestType {
@@ -76,39 +109,6 @@ public abstract class GauntletTest {
 
         public static final String VIEW = "view";
         public static final String DATA_ENTITY = "[data_entity_name]";
-    }
-
-    @BeforeMethod(alwaysRun = true)
-    public void beginExecution(Method method) {
-        testMethodName = method.getName();
-        getLogger().info(String.format("EXECUTING %s - %s...", getTestClass(), getTestMethodName()));
-        getLogger().info("STEPS:");
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void terminateExecution() {
-        getLogger().info(String.format("TERMINATING %s - %s%n", getTestClass(), getTestMethodName()));
-        UiHost.quitInstance();
-    }
-
-    protected void confirm(String testResult) {
-        Assert.assertTrue(testResult.equals(Validator.PASS), testResult);
-        getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n", getTestMethodName()));
-    }
-
-    private String getTestMethodName() {
-        return testMethodName;
-    }
-
-    private Logger getLogger() {
-        if (logger == null) {
-            logger = LogManager.getLogger(getTestClass());
-        }
-        return logger;
-    }
-
-    private String getTestClass() {
-        return className;
     }
 
 }

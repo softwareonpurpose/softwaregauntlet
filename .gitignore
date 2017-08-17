@@ -1,5 +1,6 @@
 *.class
 build
+out/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -13,8 +14,8 @@ build
 hs_err_pid*
 
 # Gradle Files #
-.gradle
+.gradle/
 
 # Idea Files #
-.idea
+.idea/
 *.iml

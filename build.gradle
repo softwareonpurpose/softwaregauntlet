@@ -11,8 +11,9 @@ repositories {
 }
 
 dependencies {
-    compile 'org.apache.logging.log4j:log4j-api:2.3'
-    compile 'org.apache.logging.log4j:log4j-core:2.3'
+    compile 'ch.qos.logback:logback-core:1.2.3'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+    compile 'org.slf4j:slf4j-api:1.7.25'
     compile 'org.testng:testng:6.8.21'
     compile 'org.seleniumhq.selenium:selenium-java:2.47.1'
     compile 'org.jboss.resteasy:resteasy-jaxrs:3.1.1.Final'
