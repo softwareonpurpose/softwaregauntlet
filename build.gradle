@@ -30,114 +30,101 @@ test {
     useTestNG()
 }
 
-task debug(type: Test) {
+task development(type: Test) {
     description = "Tests under development or being debugged"
-    doLast {
-        systemProperties['env'] = System.properties["env"]
-        maxParallelForks = 4
 
-        def groupsToInclude = []
-        def groupsToExclude = []
+    systemProperties['env'] = System.properties["env"]
+    maxParallelForks = 4
 
-        groupsToInclude.add('under_development')
-        useTestNG() {
-            groupsToInclude.each { String group -> includeGroups group }
-            groupsToExclude.each { String group -> excludeGroups group }
-        }
+    def groupsToInclude = []
+    def groupsToExclude = []
+
+    groupsToInclude.add('under_development')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
 task evt(type: Test) {
     description = "Environment Validation"
-    doLast {
-        systemProperties['env'] = System.properties["env"]
-        maxParallelForks = 4
+    systemProperties['env'] = System.properties["env"]
+    maxParallelForks = 4
 
-        def groupsToInclude = []
-        def groupsToExclude = []
+    def groupsToInclude = []
+    def groupsToExclude = []
 
-        groupsToInclude.add('evt')
-        useTestNG() {
-            groupsToInclude.each { String group -> includeGroups group }
-            groupsToExclude.each { String group -> excludeGroups group }
-        }
+    groupsToInclude.add('evt')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
 task bvt(type: Test) {
     description = "EVT and DEBUG tests"
-    doLast {
-        systemProperties['env'] = System.properties["env"]
-        maxParallelForks = 4
+    systemProperties['env'] = System.properties["env"]
+    maxParallelForks = 4
 
-        def groupsToInclude = []
-        def groupsToExclude = []
+    def groupsToInclude = []
+    def groupsToExclude = []
 
-        groupsToInclude.add('under_development')
-        groupsToInclude.add('evt')
-        useTestNG() {
-            groupsToInclude.each { String group -> includeGroups group }
-            groupsToExclude.each { String group -> excludeGroups group }
-        }
+    groupsToInclude.add('evt')
+    groupsToInclude.add('under_development')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
 task sprint(type: Test) {
     description = "Sprint validation"
-    doLast {
-        systemProperties['env'] = System.properties["env"]
-        maxParallelForks = 4
+    systemProperties['env'] = System.properties["env"]
+    maxParallelForks = 4
 
-        def groupsToInclude = []
-        def groupsToExclude = []
+    def groupsToInclude = []
+    def groupsToExclude = []
 
-        groupsToInclude.add('sprint')
-        useTestNG() {
-            groupsToInclude.each { String group -> includeGroups group }
-            groupsToExclude.each { String group -> excludeGroups group }
-        }
+    groupsToInclude.add('sprint')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
 task release(type: Test) {
     description = "Release validation"
-    doLast {
-        systemProperties['env'] = System.properties["env"]
-        maxParallelForks = 4
+    systemProperties['env'] = System.properties["env"]
+    maxParallelForks = 4
 
-        def groupsToInclude = []
-        def groupsToExclude = []
+    def groupsToInclude = []
+    def groupsToExclude = []
 
-        groupsToInclude.add('release')
-        useTestNG() {
-            groupsToInclude.each { String group -> includeGroups group }
-            groupsToExclude.each { String group -> excludeGroups group }
-        }
+    groupsToInclude.add('release')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
 task production(type: Test) {
     description = "Production validation (non-destructive)"
-    doLast {
-        systemProperties['env'] = System.properties["env"]
-        maxParallelForks = 4
+    systemProperties['env'] = System.properties["env"]
+    maxParallelForks = 4
 
-        def groupsToInclude = []
-        def groupsToExclude = []
+    def groupsToInclude = []
+    def groupsToExclude = []
 
-        groupsToInclude.add('production')
-        useTestNG() {
-            groupsToInclude.each { String group -> includeGroups group }
-            groupsToExclude.each { String group -> excludeGroups group }
-        }
+    groupsToInclude.add('production')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
 task regression(type: Test) {
     description = "All tests"
-    doLast {
-        systemProperties['env'] = System.properties["env"]
-        maxParallelForks = 4
-        useTestNG()
-    }
+    systemProperties['env'] = System.properties["env"]
+    maxParallelForks = 4
+    useTestNG()
 }
