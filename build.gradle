@@ -45,6 +45,7 @@ task debug(type: Test) {
 debug.description = "Tests under development or being debugged"
 
 task evt(type: Test) {
+    description = "Environment Validation"
     systemProperties['env'] = System.properties["env"]
     maxParallelForks = 4
 
@@ -57,9 +58,9 @@ task evt(type: Test) {
         groupsToExclude.each { String group -> excludeGroups group }
     }
 }
-evt.description = "Environment Validation"
 
 task bvt(type: Test) {
+    description = "EVT and DEBUG tests"
     systemProperties['env'] = System.properties["env"]
     maxParallelForks = 4
 
@@ -73,9 +74,9 @@ task bvt(type: Test) {
         groupsToExclude.each { String group -> excludeGroups group }
     }
 }
-bvt.description = "EVT and DEBUG tests"
 
 task sprint(type: Test) {
+    description = "Sprint validation"
     systemProperties['env'] = System.properties["env"]
     maxParallelForks = 4
 
@@ -88,9 +89,9 @@ task sprint(type: Test) {
         groupsToExclude.each { String group -> excludeGroups group }
     }
 }
-sprint.description = "Sprint validation"
 
 task release(type: Test) {
+    description = "Release validation"
     systemProperties['env'] = System.properties["env"]
     maxParallelForks = 4
 
@@ -103,9 +104,9 @@ task release(type: Test) {
         groupsToExclude.each { String group -> excludeGroups group }
     }
 }
-release.description = "Release validation"
 
 task production(type: Test) {
+    description = "Production validation (non-destructive)"
     systemProperties['env'] = System.properties["env"]
     maxParallelForks = 4
 
@@ -118,11 +119,10 @@ task production(type: Test) {
         groupsToExclude.each { String group -> excludeGroups group }
     }
 }
-production.description = "Production validation (non-destructive)"
 
 task regression(type: Test) {
+    description = "All tests"
     systemProperties['env'] = System.properties["env"]
     maxParallelForks = 4
     useTestNG()
 }
-regression.description = "All tests"
