@@ -42,6 +42,22 @@ task debug(type: Test) {
         groupsToExclude.each { String group -> excludeGroups group }
     }
 }
+debug.description = "Tests under development or being debugged"
+
+task evt(type: Test) {
+    systemProperties['env'] = System.properties["env"]
+    maxParallelForks = 4
+
+    def groupsToInclude = []
+    def groupsToExclude = []
+
+    groupsToInclude.add('evt')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
+    }
+}
+evt.description = "Environment Validation"
 
 task bvt(type: Test) {
     systemProperties['env'] = System.properties["env"]
@@ -57,20 +73,7 @@ task bvt(type: Test) {
         groupsToExclude.each { String group -> excludeGroups group }
     }
 }
-
-task evt(type: Test) {
-    systemProperties['env'] = System.properties["env"]
-    maxParallelForks = 4
-
-    def groupsToInclude = []
-    def groupsToExclude = []
-
-    groupsToInclude.add('evt')
-    useTestNG() {
-        groupsToInclude.each { String group -> includeGroups group }
-        groupsToExclude.each { String group -> excludeGroups group }
-    }
-}
+bvt.description = "EVT and DEBUG tests"
 
 task sprint(type: Test) {
     systemProperties['env'] = System.properties["env"]
@@ -85,12 +88,7 @@ task sprint(type: Test) {
         groupsToExclude.each { String group -> excludeGroups group }
     }
 }
-
-task regression(type: Test) {
-    systemProperties['env'] = System.properties["env"]
-    maxParallelForks = 4
-    useTestNG()
-}
+sprint.description = "Sprint validation"
 
 task release(type: Test) {
     systemProperties['env'] = System.properties["env"]
@@ -105,6 +103,7 @@ task release(type: Test) {
         groupsToExclude.each { String group -> excludeGroups group }
     }
 }
+release.description = "Release validation"
 
 task production(type: Test) {
     systemProperties['env'] = System.properties["env"]
@@ -119,3 +118,11 @@ task production(type: Test) {
         groupsToExclude.each { String group -> excludeGroups group }
     }
 }
+production.description = "Production validation (non-destructive)"
+
+task regression(type: Test) {
+    systemProperties['env'] = System.properties["env"]
+    maxParallelForks = 4
+    useTestNG()
+}
+regression.description = "All tests"
