@@ -73,3 +73,16 @@ On first execution, gradle will install necessary files before executing the bui
       
       `confirm(Validator.getInstance(expected, actual).validate());`
       - executes all verifications for a given view or data element (e.g. for regions within a view)
+
+# Browsers
+Using UiNavigator, default configurations of the following browsers are included:
+ - HtmlUnit (headless)
+ - Google Chrome
+ - Mozilla Firefox
+ - Microsoft InternetExplorer
+
+To utilize any of these configurations, simply put the appropriate WebDriver executable in src/main/resources and call UiHost.getInstance([DriverInstantiation]).  For example, in a @BeforeMethod, add the following:
+
+    UiHost.getInstance(DefaultChromeInstantiation.getInstance());
+
+For reference, these default configurations are located in the UiNavigator jar file under 'driver'.  To implement an alternate configuration of any of these browsers, OR to add support for a different browser or mobile device, implement a new DriverInstantiation. 
