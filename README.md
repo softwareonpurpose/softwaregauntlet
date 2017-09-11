@@ -73,20 +73,22 @@ For example:
    - View
      - inherits a view interface
      - 'actions' which result in a state or view transition
-       - set
        - click
        - select
+       - login
+       - register
+       - edit
        - etc.
-     - 'expect' called when an action is expected to load the view
-     - 'directNav' to load the view directly in the browser
-     - 'in[Region]' to return a particular 'Region' of the view
+     - 'expect' called when an action performed that may result in a state change
+     - 'directNav' to load a view directly in the browser
+     - 'in[Region]' to return a particular 'Region' of a view
         - inHeader
         - inContent
         - inFooter
         - inTopNav
         - etc.
     - Data
-      - inherits a data interface
+      - inherits a test-appropriate data model interface
     - Expected
       - inherits a view or data interface
       - contains the business logic necessary to determine the expected value of all elements, based on provided data scenario
