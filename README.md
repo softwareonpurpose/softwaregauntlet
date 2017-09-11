@@ -21,6 +21,41 @@ In a console, in the project directory:
 **NOTE:**
 On first execution, gradle will install necessary files before executing the build.  This is a one-time install.
 
+# Browsers
+The appropriate WebDriver executables MUST be added to main/resources.  By default, IF chromedriver.exe exists in that location, Google Chrome will be used by default.  The following default DriverInstantiation implementations are available:
+ - DefaultChromeInstantiation for Google Chrome
+ - DefaultHtmlUnitInstantiation for HtmlUnit (headless)
+ - DefaultFirefoxInstantiation for Mozilla Firefox
+ - DefaultIeInstantiation for Microsoft InternetExplorer
+
+To utilize any of these configurations, simply put the appropriate WebDriver executable in src/main/resources, and in your code call UiHost.getInstance([DriverInstantiation]).  For example, in a @BeforeMethod, add the following:
+
+    UiHost.getInstance(DefaultChromeInstantiation.getInstance());
+
+For reference, these default configurations are located in the UiNavigator jar file under 'driver'.  To implement an alternate configuration of any of these browsers, OR to add support for a different browser or mobile device, implement a new DriverInstantiation.
+
+For example:
+    
+    public class DefaultChromeInstantiation extends DriverInstantiation {
+
+        public static DriverInstantiation getInstance() {
+            return new DefaultChromeInstantiation();
+        }
+
+        @Override
+        protected ChromeDriver instantiateDriver() {
+            System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
+            return new ChromeDriver();
+        }
+
+        @Override
+        protected void configureDriver(WebDriver driver) {
+            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+            driver.manage().deleteAllCookies();
+            driver.manage().window().fullscreen();
+        }
+    }
+
 # Test Files
  - All tests reside in src/test/java and are organized by the view or data that will be validated
  - All other supporting components reside in src/main/java and are organized by the components they support, in hierarchical fashion
@@ -72,17 +107,4 @@ On first execution, gradle will install necessary files before executing the bui
       - always in the form of 
       
       `confirm(Validator.getInstance(expected, actual).validate());`
-      - executes all verifications for a given view or data element (e.g. for regions within a view)
-
-# Browsers
-Using UiNavigator, default configurations of the following browsers are included:
- - HtmlUnit (headless)
- - Google Chrome
- - Mozilla Firefox
- - Microsoft InternetExplorer
-
-To utilize any of these configurations, simply put the appropriate WebDriver executable in src/main/resources and call UiHost.getInstance([DriverInstantiation]).  For example, in a @BeforeMethod, add the following:
-
-    UiHost.getInstance(DefaultChromeInstantiation.getInstance());
-
-For reference, these default configurations are located in the UiNavigator jar file under 'driver'.  To implement an alternate configuration of any of these browsers, OR to add support for a different browser or mobile device, implement a new DriverInstantiation. 
+      - executes all verifications for a given view or data element (e.g. for regions within a view) 
