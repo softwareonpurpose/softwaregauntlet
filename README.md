@@ -36,10 +36,10 @@ For reference, these default configurations are located in the UiNavigator jar f
 
 For example:
     
-    public class DefaultChromeInstantiation extends DriverInstantiation {
+    public class CookieFreeFullScreenChromeInstantiation extends DriverInstantiation {
 
         public static DriverInstantiation getInstance() {
-            return new DefaultChromeInstantiation();
+            return new CookieFreeFullScreenChromeInstantiation();
         }
 
         @Override
