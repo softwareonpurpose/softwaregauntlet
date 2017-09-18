@@ -4,7 +4,6 @@ version '0.0.1-SNAPSHOT'
 apply plugin: 'java'
 
 sourceCompatibility = 1.8
-version = '1.0'
 
 repositories {
     mavenCentral()
@@ -15,7 +14,7 @@ dependencies {
     compile 'ch.qos.logback:logback-classic:1.2.3'
     compile 'org.slf4j:slf4j-api:1.7.25'
     compile 'org.testng:testng:6.8.21'
-    compile 'org.seleniumhq.selenium:selenium-java:2.47.1'
+    compile 'org.seleniumhq.selenium:selenium-java:3.5.3'
     compile 'org.jboss.resteasy:resteasy-jaxrs:3.1.1.Final'
     compile 'org.jboss.resteasy:resteasy-client:3.1.1.Final'
     compile files('./src/main/resources/validator4test-0.0.1.jar')
