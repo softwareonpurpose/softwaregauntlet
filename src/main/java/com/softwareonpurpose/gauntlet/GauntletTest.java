@@ -61,11 +61,11 @@ public abstract class GauntletTest {
     }
 
     protected void given(Object testDataDefinition) {
-        getLogger().info(String.format("GIVEN: %s", testDataDefinition.toString()));
+        getLogger().info(String.format("%nGIVEN: %s", testDataDefinition.toString()));
     }
 
     protected void when() {
-        getLogger().info("WHEN:");
+        getLogger().info("%nWHEN:");
     }
 
     protected void then(String testResult) {
