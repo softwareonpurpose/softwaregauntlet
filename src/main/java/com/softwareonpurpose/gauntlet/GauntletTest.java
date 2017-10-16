@@ -60,12 +60,17 @@ public abstract class GauntletTest {
         UiHost.quitInstance();
     }
 
-    protected void given(Object testDataDefinition) {
-        getLogger().info(String.format("%nGIVEN: %s", testDataDefinition.toString()));
+    protected void given(Object... testDataDefinitions) {
+        String label = "GIVEN";
+        for (Object testDataDefinition : testDataDefinitions) {
+            getLogger().info(String.format("%s: %s", label, testDataDefinition.toString()));
+            label = "  AND";
+        }
     }
 
     protected void when() {
-        getLogger().info("%nWHEN:");
+        getLogger().info("");
+        getLogger().info("WHEN:");
     }
 
     protected void then(String testResult) {
@@ -105,6 +110,7 @@ public abstract class GauntletTest {
      * Names of Applications under test
      */
     public class Application {
+        public static final String THE_INTERNET = "the_internet";
 
         //  public final static String APPLICATION_NAME = "[application name]";
     }
@@ -113,6 +119,9 @@ public abstract class GauntletTest {
      * Names of Views from applications under test
      */
     public class View {
+        public static final String CHECKBOXES = "checkboxes";
+        public static final String DROPDOWN = "dropdown";
+        public static final String DYNAMIC_CONTROLS = "dynamic_controls";
 
         //  public final static String VIEW_NAME = "[view name]";
     }
