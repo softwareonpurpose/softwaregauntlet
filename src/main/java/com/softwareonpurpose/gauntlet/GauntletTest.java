@@ -14,6 +14,7 @@
 package com.softwareonpurpose.gauntlet;
 
 import com.softwareonpurpose.uinavigator.UiHost;
+import com.softwareonpurpose.uinavigator.driver.DefaultIeInstantiation;
 import com.softwareonpurpose.validator4test.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,22 +35,49 @@ public abstract class GauntletTest {
 
     protected GauntletTest() {
         this.className = this.getClass().toString().replace("class ", "");
+        Validator.setStyle(Validator.ValidationLoggingStyle.BDD);
+        initializeUiHost();
+    }
+
+    private void initializeUiHost() {
+        String browser = System.getProperty("browser");
+        if (browser != null) {
+            switch (browser) {
+                case "ie":
+                    UiHost.setDriverInstantiation(DefaultIeInstantiation.getInstance());
+                default:
+            }
+        }
     }
 
     @BeforeMethod(alwaysRun = true)
     public void beginExecution(Method method) {
         testMethodName = method.getName();
-        getLogger().info(String.format("EXECUTING %s - %s...", getTestClass(), getTestMethodName()));
-        getLogger().info("STEPS:");
     }
 
     @AfterMethod(alwaysRun = true)
     public void terminateExecution() {
-        getLogger().info(String.format("TERMINATING %s - %s%n", getTestClass(), getTestMethodName()));
         UiHost.quitInstance();
     }
 
-    protected void confirm(String testResult) {
+    protected void given(Object... testDataDefinitions) {
+        String label = "GIVEN";
+        for (Object testDataDefinition : testDataDefinitions) {
+            getLogger().info(String.format("%s: %s", label, testDataDefinition.toString()));
+            label = "  AND";
+        }
+    }
+
+    protected void when() {
+        getLogger().info("");
+        getLogger().info("WHEN:");
+    }
+
+    protected void then(String testResult) {
+        confirm(testResult);
+    }
+
+    private void confirm(String testResult) {
         Assert.assertTrue(testResult.equals(Validator.PASS), testResult);
         getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n", getTestMethodName()));
     }
@@ -60,7 +88,7 @@ public abstract class GauntletTest {
 
     private Logger getLogger() {
         if (logger == null) {
-            logger = LoggerFactory.getLogger(getTestClass());
+            logger = LoggerFactory.getLogger("");
         }
         return logger;
     }
@@ -82,6 +110,7 @@ public abstract class GauntletTest {
      * Names of Applications under test
      */
     public class Application {
+        public static final String THE_INTERNET = "the_internet";
 
         //  public final static String APPLICATION_NAME = "[application name]";
     }
@@ -90,6 +119,9 @@ public abstract class GauntletTest {
      * Names of Views from applications under test
      */
     public class View {
+        public static final String CHECKBOXES = "checkboxes";
+        public static final String DROPDOWN = "dropdown";
+        public static final String DYNAMIC_CONTROLS = "dynamic_controls";
 
         //  public final static String VIEW_NAME = "[view name]";
     }
