@@ -32,17 +32,13 @@ test {
 
 task development(type: Test) {
     description = "Tests under development or being debugged"
-
     systemProperties['env'] = System.properties["env"]
     maxParallelForks = 4
 
     def groupsToInclude = []
-    def groupsToExclude = []
-
     groupsToInclude.add('under_development')
     useTestNG() {
         groupsToInclude.each { String group -> includeGroups group }
-        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
@@ -52,12 +48,9 @@ task evt(type: Test) {
     maxParallelForks = 4
 
     def groupsToInclude = []
-    def groupsToExclude = []
-
     groupsToInclude.add('evt')
     useTestNG() {
         groupsToInclude.each { String group -> includeGroups group }
-        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
@@ -67,13 +60,10 @@ task bvt(type: Test) {
     maxParallelForks = 4
 
     def groupsToInclude = []
-    def groupsToExclude = []
-
     groupsToInclude.add('evt')
     groupsToInclude.add('under_development')
     useTestNG() {
         groupsToInclude.each { String group -> includeGroups group }
-        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
@@ -83,12 +73,9 @@ task sprint(type: Test) {
     maxParallelForks = 4
 
     def groupsToInclude = []
-    def groupsToExclude = []
-
     groupsToInclude.add('sprint')
     useTestNG() {
         groupsToInclude.each { String group -> includeGroups group }
-        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
@@ -98,12 +85,9 @@ task release(type: Test) {
     maxParallelForks = 4
 
     def groupsToInclude = []
-    def groupsToExclude = []
-
     groupsToInclude.add('release')
     useTestNG() {
         groupsToInclude.each { String group -> includeGroups group }
-        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
@@ -113,12 +97,9 @@ task production(type: Test) {
     maxParallelForks = 4
 
     def groupsToInclude = []
-    def groupsToExclude = []
-
     groupsToInclude.add('production')
     useTestNG() {
         groupsToInclude.each { String group -> includeGroups group }
-        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
