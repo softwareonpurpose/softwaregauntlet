@@ -19,6 +19,7 @@ dependencies {
     compile 'org.jboss.resteasy:resteasy-client:3.1.1.Final'
     compile files('./src/main/resources/validator4test-0.0.1.jar')
     compile files('./src/main/resources/uinavigator-1.0.jar')
+    compile files('./src/main/resources/traceability4test-0.0.1-SNAPSHOT.jar')
 }
 
 task wrapper(type: Wrapper) {
