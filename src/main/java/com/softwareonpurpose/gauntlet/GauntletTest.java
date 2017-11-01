@@ -29,10 +29,10 @@ public abstract class GauntletTest {
     private static final int oneSecond = 1000;
     private static final int oneMinute = oneSecond * 60;
     protected static final int defaultTimeout = oneMinute * 1;  //  move the multiplier to a properties file
+    private static final CoverageReport report = CoverageReport.getInstance("coverage.rpt");
     private final String className;
     private Logger logger;
     private String testMethodName;
-    private static final
 
     protected GauntletTest() {
         this.className = this.getClass().toString().replace("class ", "");
@@ -80,7 +80,8 @@ public abstract class GauntletTest {
 
     private void confirm(String testResult) {
         Assert.assertTrue(testResult.equals(Validator.PASS), testResult);
-        getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n", getTestMethodName()));
+        getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n",
+                getTestMethodName()));
     }
 
     private String getTestMethodName() {
@@ -102,9 +103,11 @@ public abstract class GauntletTest {
 
         public static final String EVT = "evt";                 //  Environment Validation Test
         public static final String DEV = "under_development";   //  Test being developed and/or debugged
-        public static final String PRODUCTION = "production";   //  Benign (alters NO source data) test executable in Production
+        public static final String PRODUCTION = "production";   //  Benign (alters NO source data) test executable in
+        // Production
         public static final String RELEASE = "release";         //  Test critical to validating Release Readiness
-        public static final String SPRINT = "sprint";           //  Test verifying acceptance criteria for current sprint
+        public static final String SPRINT = "sprint";           //  Test verifying acceptance criteria for current
+        // sprint
     }
 
     /**
