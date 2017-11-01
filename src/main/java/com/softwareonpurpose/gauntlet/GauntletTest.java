@@ -32,6 +32,7 @@ public abstract class GauntletTest {
     private final String className;
     private Logger logger;
     private String testMethodName;
+    private static final
 
     protected GauntletTest() {
         this.className = this.getClass().toString().replace("class ", "");
