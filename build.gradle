@@ -18,6 +18,7 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-java:3.7.1'
     compile 'org.jboss.resteasy:resteasy-jaxrs:3.1.1.Final'
     compile 'org.jboss.resteasy:resteasy-client:3.1.1.Final'
+    compile files('./src/main/resources/indentmanager-0.0.1.jar')
     compile files('./src/main/resources/validator4test-0.0.1.jar')
     compile files('./src/main/resources/uinavigator-1.0.jar')
     compile files('./src/main/resources/traceability4test-0.0.1.jar')
