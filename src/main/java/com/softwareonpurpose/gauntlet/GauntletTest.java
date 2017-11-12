@@ -20,11 +20,16 @@ import com.softwareonpurpose.validator4test.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class GauntletTest {
 
@@ -35,6 +40,7 @@ public abstract class GauntletTest {
     private final String className;
     private Logger logger;
     private String testMethodName;
+    private String requirements;
 
     protected GauntletTest() {
         this.className = this.getClass().getSimpleName();
@@ -60,10 +66,26 @@ public abstract class GauntletTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void terminateExecution() {
+    public void terminateExecution(ITestResult result) {
         UiHost.quitInstance();
-        report.addEntry(testMethodName);
-        CoverageReport.reset();
+        addCoverageEntry(result);
+    }
+
+    private void addCoverageEntry(ITestResult result) {
+        List<String> requirementList;
+        if (requirements == null) {
+            requirementList = Collections.singletonList(null);
+        } else {
+            requirementList = Arrays.stream(requirements.split("\\|")).collect(Collectors.toList());
+        }
+        String scenario = result.getParameters().length > 0 ? String.format("|%s", result.getParameters()[0].toString
+                ()) : "";
+        for (String requirement : requirementList) {
+            String entry = requirement == null ? String.format("%s%s", testMethodName, scenario) : String.format
+                    ("%s|%s%s", requirement, testMethodName, scenario);
+            report.addEntry(entry);
+        }
+        setRequirements(null);
     }
 
     @AfterClass
@@ -88,7 +110,8 @@ public abstract class GauntletTest {
         confirm(testResult);
     }
 
-    private void confirm(String testResult) {
+    @SuppressWarnings("WeakerAccess")
+    protected void confirm(String testResult) {
         Assert.assertTrue(testResult.equals(Validator.PASS), testResult);
         getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n",
                 getTestMethodName()));
@@ -107,6 +130,10 @@ public abstract class GauntletTest {
 
     private String getTestClass() {
         return className;
+    }
+
+    protected void setRequirements(String requirements) {
+        this.requirements = requirements;
     }
 
     protected class TestType {
