@@ -30,13 +30,14 @@ public abstract class GauntletTest {
     private static final int oneSecond = 1000;
     private static final int oneMinute = oneSecond * 60;
     protected static final int defaultTimeout = oneMinute * 1;  //  move the multiplier to a properties file
-    private static final CoverageReport report = CoverageReport.getInstance("coverage.rpt");
+    private final CoverageReport report;
     private final String className;
     private Logger logger;
     private String testMethodName;
 
     protected GauntletTest() {
         this.className = this.getClass().toString().replace("class ", "");
+        report = CoverageReport.getInstance(String.format("%s.coverage.rpt", className));
         Validator.setStyle(Validator.ValidationLoggingStyle.BDD);
         initializeUiHost();
     }
@@ -55,11 +56,14 @@ public abstract class GauntletTest {
     @BeforeMethod(alwaysRun = true)
     public void beginExecution(Method method) {
         testMethodName = method.getName();
+        report.addEntry(testMethodName);
     }
 
     @AfterMethod(alwaysRun = true)
     public void terminateExecution() {
         UiHost.quitInstance();
+        report.write();
+        CoverageReport.reset();
     }
 
     protected void given(Object... testDataDefinitions) {
