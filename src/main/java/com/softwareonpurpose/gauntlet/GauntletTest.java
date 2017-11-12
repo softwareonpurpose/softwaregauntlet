@@ -20,6 +20,7 @@ import com.softwareonpurpose.validator4test.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -56,14 +57,18 @@ public abstract class GauntletTest {
     @BeforeMethod(alwaysRun = true)
     public void beginExecution(Method method) {
         testMethodName = method.getName();
-        report.addEntry(testMethodName);
     }
 
     @AfterMethod(alwaysRun = true)
     public void terminateExecution() {
         UiHost.quitInstance();
-        report.write();
+        report.addEntry(testMethodName);
         CoverageReport.reset();
+    }
+
+    @AfterClass
+    public void writeCoverageReport() {
+        report.write();
     }
 
     protected void given(Object... testDataDefinitions) {
