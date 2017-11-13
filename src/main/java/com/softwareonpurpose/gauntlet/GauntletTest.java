@@ -94,7 +94,7 @@ public abstract class GauntletTest {
         StringBuilder scenario = new StringBuilder();
         for (Object participant : result.getParameters()) {
             String participantDescription = participant.toString();
-            String formattedDescription = participantDescription.substring(0, 0).equals("{") ? participantDescription
+            String formattedDescription = participantDescription.substring(0, 1).equals("{") ? participantDescription
                     : String.format("{%s}", participantDescription);
             scenario.append(formattedDescription);
         }
