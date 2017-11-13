@@ -78,7 +78,7 @@ public abstract class GauntletTest {
         } else {
             requirementList = Arrays.stream(requirements.split("\\|")).collect(Collectors.toList());
         }
-        String scenario = result.getParameters().length > 0 ? String.format("|%s", result.getParameters()[0].toString
+        String scenario = result.getParameters().length > 0 ? String.format("%s", result.getParameters()[0].toString
                 ()) : null;
         for (String requirement : requirementList) {
             String requirementTest = requirement == null ? testMethodName : String.format("%s.%s", requirement,
