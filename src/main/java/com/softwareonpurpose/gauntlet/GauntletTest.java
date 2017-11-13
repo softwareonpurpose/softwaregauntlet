@@ -78,14 +78,24 @@ public abstract class GauntletTest {
         } else {
             requirementList = Arrays.stream(requirements.split("\\|")).collect(Collectors.toList());
         }
-        String scenario = result.getParameters().length > 0 ? String.format("%s", result.getParameters()[0].toString
-                ()) : null;
+        String scenario = compileScenario(result);
         for (String requirement : requirementList) {
             String requirementTest = requirement == null ? testMethodName : String.format("%s.%s", requirement,
                     testMethodName);
             report.addEntry(requirementTest, scenario);
         }
         setRequirements(null);
+    }
+
+    private String compileScenario(ITestResult result) {
+        if (result.getParameters().length == 0) {
+            return null;
+        }
+        StringBuilder scenario = new StringBuilder();
+        for (Object participant : result.getParameters()) {
+            scenario.append(String.format("{%s}", participant.toString()));
+        }
+        return scenario.toString();
     }
 
     @AfterClass
