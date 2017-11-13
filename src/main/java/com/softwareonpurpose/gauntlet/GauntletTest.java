@@ -79,11 +79,11 @@ public abstract class GauntletTest {
             requirementList = Arrays.stream(requirements.split("\\|")).collect(Collectors.toList());
         }
         String scenario = result.getParameters().length > 0 ? String.format("|%s", result.getParameters()[0].toString
-                ()) : "";
+                ()) : null;
         for (String requirement : requirementList) {
-            String entry = requirement == null ? String.format("%s%s", testMethodName, scenario) : String.format
-                    ("%s|%s%s", requirement, testMethodName, scenario);
-            report.addEntry(entry);
+            String requirementTest = requirement == null ? testMethodName : String.format("%s.%s", requirement,
+                    testMethodName);
+            report.addEntry(requirementTest, scenario);
         }
         setRequirements(null);
     }
