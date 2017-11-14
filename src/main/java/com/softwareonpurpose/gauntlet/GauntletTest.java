@@ -80,8 +80,8 @@ public abstract class GauntletTest {
         }
         String scenario = compileScenario(result);
         for (String requirement : requirementList) {
-            String targetTest = String.format("%s.%s", className, testMethodName);
-            String requirementTest = requirement == null ? targetTest : String.format("%s.%s", requirement, targetTest);
+            String test = String.format("%s.%s", className, testMethodName);
+            String requirementTest = requirement == null ? test : String.format("%s.%s", requirement, test);
             report.addEntry(requirementTest, scenario);
         }
         setRequirements(null);
