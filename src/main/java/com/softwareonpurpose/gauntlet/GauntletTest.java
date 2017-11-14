@@ -44,7 +44,7 @@ public abstract class GauntletTest {
 
     protected GauntletTest() {
         this.className = this.getClass().getSimpleName();
-        report = CoverageReport.getInstance(String.format("%s.coverage.rpt", className));
+        report = CoverageReport.getInstance(className);
         Validator.setStyle(Validator.ValidationLoggingStyle.BDD);
         initializeUiHost();
     }
