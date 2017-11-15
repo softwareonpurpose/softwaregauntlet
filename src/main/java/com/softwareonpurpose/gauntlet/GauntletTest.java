@@ -81,7 +81,7 @@ public abstract class GauntletTest {
         String scenario = compileScenario(result);
         for (String requirement : requirementList) {
             String test = String.format("%s.%s", className, testMethodName);
-            report.addEntry(test, scenario, requirement);
+            report.addEntry(test, scenario, requirement.replace(".", "|"));
         }
         setRequirements(null);
     }
