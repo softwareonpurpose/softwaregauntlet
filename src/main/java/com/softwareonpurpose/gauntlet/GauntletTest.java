@@ -163,7 +163,6 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class Application {
-        public static final String THE_INTERNET = "the_internet";
 
         //  public final static String APPLICATION_NAME = "[application name]";
     }
