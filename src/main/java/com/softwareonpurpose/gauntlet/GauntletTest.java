@@ -101,7 +101,7 @@ public abstract class GauntletTest {
         return scenario.toString();
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void writeCoverageReport() {
         report.write();
     }
