@@ -151,11 +151,9 @@ public abstract class GauntletTest {
 
         public static final String EVT = "evt";                 //  Environment Validation Test
         public static final String DEV = "under_development";   //  Test being developed and/or debugged
-        public static final String PRODUCTION = "production";   //  Benign (alters NO source data) test executable in
-        // Production
+        public static final String PRODUCTION = "production";   //  Benign (alters NO source data) executable in Production
         public static final String RELEASE = "release";         //  Test critical to validating Release Readiness
-        public static final String SPRINT = "sprint";           //  Test verifying acceptance criteria for current
-        // sprint
+        public static final String SPRINT = "sprint";           //  Validates acceptance criteria for current sprint
     }
 
     /**
@@ -172,9 +170,6 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class View {
-        public static final String CHECKBOXES = "checkboxes";
-        public static final String DROPDOWN = "dropdown";
-        public static final String DYNAMIC_CONTROLS = "dynamic_controls";
 
         //  public final static String VIEW_NAME = "[view name]";
     }
