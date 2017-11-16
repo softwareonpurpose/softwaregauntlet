@@ -33,9 +33,6 @@ import java.util.stream.Collectors;
 
 public abstract class GauntletTest {
 
-    private static final int oneSecond = 1000;
-    private static final int oneMinute = oneSecond * 60;
-    protected static final int defaultTimeout = oneMinute * 1;  //  move the multiplier to a properties file
     private final CoverageReport report;
     private final String className;
     private Logger logger;
@@ -106,6 +103,7 @@ public abstract class GauntletTest {
         report.write();
     }
 
+    @SuppressWarnings("unused")
     protected void given(Object... testDataDefinitions) {
         String label = "GIVEN";
         for (Object testDataDefinition : testDataDefinitions) {
@@ -114,11 +112,13 @@ public abstract class GauntletTest {
         }
     }
 
+    @SuppressWarnings("unused")
     protected void when() {
         getLogger().info("");
         getLogger().info("WHEN:");
     }
 
+    @SuppressWarnings("unused")
     protected void then(String testResult) {
         confirm(testResult);
     }
@@ -141,14 +141,12 @@ public abstract class GauntletTest {
         return logger;
     }
 
-    private String getTestClass() {
-        return className;
-    }
-
-    protected void setRequirements(String requirements) {
+    @SuppressWarnings("WeakerAccess")
+    protected void setRequirements(@SuppressWarnings("SameParameterValue") String requirements) {
         this.requirements = requirements;
     }
 
+    @SuppressWarnings("unused")
     protected class TestType {
 
         public static final String EVT = "evt";                 //  Environment Validation Test
@@ -163,6 +161,7 @@ public abstract class GauntletTest {
     /**
      * Names of Applications under test
      */
+    @SuppressWarnings("unused")
     public class Application {
         public static final String THE_INTERNET = "the_internet";
 
@@ -172,6 +171,7 @@ public abstract class GauntletTest {
     /**
      * Names of Views from applications under test
      */
+    @SuppressWarnings("unused")
     public class View {
         public static final String CHECKBOXES = "checkboxes";
         public static final String DROPDOWN = "dropdown";
@@ -183,6 +183,7 @@ public abstract class GauntletTest {
     /**
      * Names of Databases supporting applications under test
      */
+    @SuppressWarnings("unused")
     public class Database {
 
         //  public final static String DATABASE_NAME = "[database name]";
@@ -191,6 +192,7 @@ public abstract class GauntletTest {
     /**
      * Validation targets
      */
+    @SuppressWarnings("unused")
     public class Validatee {
 
         public static final String VIEW = "view";
