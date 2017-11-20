@@ -1,5 +1,5 @@
-group 'com.teksystemsgs'
-version '0.0.1-SNAPSHOT'
+group 'com.softwareonpurpose'
+version '1.0.0'
 
 apply plugin: 'java'
 
