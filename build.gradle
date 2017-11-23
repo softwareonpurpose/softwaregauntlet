@@ -32,7 +32,7 @@ test {
     useTestNG()
 }
 
-task development(type: Test) {
+task debug(type: Test) {
     description = "Tests under development or being debugged"
     systemProperties['env'] = System.properties["env"]
     maxParallelForks = 4
