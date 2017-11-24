@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 public abstract class GauntletTest {
 
     private final CoverageReport report;
-    private final String className;
+    private final String coverageFile;
     private Logger logger;
     private String testMethodName;
     private String requirements;
@@ -151,7 +151,8 @@ public abstract class GauntletTest {
 
         public static final String EVT = "evt";                 //  Environment Validation Test
         public static final String DEV = "under_development";   //  Test being developed and/or debugged
-        public static final String PRODUCTION = "production";   //  Benign (alters NO source data) executable in Production
+        public static final String PRODUCTION = "production";   //  Benign (alters NO source data) executable in
+        // Production
         public static final String RELEASE = "release";         //  Test critical to validating Release Readiness
         public static final String SPRINT = "sprint";           //  Validates acceptance criteria for current sprint
     }
