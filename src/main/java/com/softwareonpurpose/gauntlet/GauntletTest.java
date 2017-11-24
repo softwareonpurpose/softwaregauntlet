@@ -40,8 +40,8 @@ public abstract class GauntletTest {
     private String requirements;
 
     protected GauntletTest() {
-        this.className = this.getClass().getSimpleName();
-        report = CoverageReport.getInstance(className);
+        this.coverageFile = String.format("%s.application", this.getClass().getSimpleName());
+        report = CoverageReport.getInstance(coverageFile);
         Validator.setStyle(Validator.ValidationLoggingStyle.BDD);
         initializeUiHost();
     }
