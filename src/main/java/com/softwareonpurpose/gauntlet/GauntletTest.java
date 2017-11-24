@@ -34,13 +34,14 @@ import java.util.stream.Collectors;
 public abstract class GauntletTest {
 
     private final CoverageReport report;
-    private final String coverageFile;
+    private final String classname;
     private Logger logger;
     private String testMethodName;
     private String requirements;
 
     protected GauntletTest() {
-        this.coverageFile = String.format("%s.application", this.getClass().getSimpleName());
+        this.classname = this.getClass().getSimpleName();
+        String coverageFile = String.format("%s.application", classname);
         report = CoverageReport.getInstance(coverageFile);
         Validator.setStyle(Validator.ValidationLoggingStyle.BDD);
         initializeUiHost();
@@ -78,7 +79,7 @@ public abstract class GauntletTest {
         String scenario = compileScenario(result);
         for (String requirement : requirementList) {
             requirement = requirement != null ? requirement.replace(".", "|") : null;
-            String test = String.format("%s.%s", className, testMethodName);
+            String test = String.format("%s.%s", classname, testMethodName);
             report.addEntry(test, scenario, requirement);
         }
         setRequirements(null);
