@@ -35,6 +35,7 @@ test {
 task debug(type: Test) {
     description = "Tests under development or being debugged"
     systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
     maxParallelForks = 4
 
     def groupsToInclude = []
@@ -47,6 +48,7 @@ task debug(type: Test) {
 task evt(type: Test) {
     description = "Environment Validation"
     systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
     maxParallelForks = 4
 
     def groupsToInclude = []
@@ -59,6 +61,7 @@ task evt(type: Test) {
 task bvt(type: Test) {
     description = "EVT and DEBUG tests"
     systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
     maxParallelForks = 4
 
     def groupsToInclude = []
@@ -72,6 +75,7 @@ task bvt(type: Test) {
 task sprint(type: Test) {
     description = "Sprint validation"
     systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
     maxParallelForks = 4
 
     def groupsToInclude = []
@@ -84,6 +88,7 @@ task sprint(type: Test) {
 task release(type: Test) {
     description = "Release validation"
     systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
     maxParallelForks = 4
 
     def groupsToInclude = []
@@ -96,6 +101,7 @@ task release(type: Test) {
 task production(type: Test) {
     description = "Production validation (non-destructive)"
     systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
     maxParallelForks = 4
 
     def groupsToInclude = []
@@ -108,6 +114,7 @@ task production(type: Test) {
 task regression(type: Test) {
     description = "All tests"
     systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
     maxParallelForks = 4
     useTestNG()
 }
