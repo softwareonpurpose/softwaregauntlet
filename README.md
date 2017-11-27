@@ -6,7 +6,7 @@ In a PowerShell console, execute 'onboarding.ps1' found at the root of the repos
 It will require restarting the console multiple times to complete each install.
  - PowerShell (5.0)
  - Chocolatey
- - JDK8 (Java 1.8)
+ - JDK9 (Java 1.9)
  - Git
  - PoshGit (powershell support for Git)
  - IntelliJ
