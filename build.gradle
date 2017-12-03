@@ -1,5 +1,5 @@
 group 'com.softwareonpurpose'
-version '1.0.1'
+version '1.0.2'
 
 apply plugin: 'java'
 
@@ -29,6 +29,11 @@ task wrapper(type: Wrapper) {
 }
 
 test {
+    description = "All tests"
+    systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
+    systemProperties['host'] = System.properties["host"]
+    maxParallelForks = 4
     useTestNG()
 }
 
