@@ -48,7 +48,7 @@ public abstract class GauntletTest {
     }
 
     private void initializeUiHost() {
-        String browser = System.getProperty("browser");
+        String browser = System.getProperty("host");
         if (browser != null) {
             switch (browser) {
                 case "ie":
