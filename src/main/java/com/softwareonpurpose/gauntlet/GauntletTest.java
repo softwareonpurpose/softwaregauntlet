@@ -13,7 +13,7 @@
    limitations under the License.*/
 package com.softwareonpurpose.gauntlet;
 
-import com.softwareonpurpose.traceability4test.CoverageReport;
+import com.softwareonpurpose.coverage4test.CoverageReport;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.driver.DefaultIeInstantiation;
 import com.softwareonpurpose.validator4test.Validator;
@@ -41,8 +41,7 @@ public abstract class GauntletTest {
 
     protected GauntletTest() {
         this.classname = this.getClass().getSimpleName();
-        String coverageFile = String.format("%s.application", classname);
-        report = CoverageReport.getInstance(coverageFile);
+        report = CoverageReport.construct(classname);
         Validator.setStyle(Validator.ValidationLoggingStyle.BDD);
         initializeUiHost();
     }
@@ -79,8 +78,7 @@ public abstract class GauntletTest {
         String scenario = compileScenario(result);
         for (String requirement : requirementList) {
             requirement = requirement != null ? requirement.replace(".", "|") : null;
-            String test = String.format("%s.%s", classname, testMethodName);
-            report.addEntry(test, scenario, requirement);
+            report.addEntry(testMethodName, scenario, requirement);
         }
         setRequirements(null);
     }
@@ -189,7 +187,7 @@ public abstract class GauntletTest {
      * Validation targets
      */
     @SuppressWarnings("unused")
-    public class Validatee {
+    public class TestSubject {
 
         public static final String VIEW = "view";
         public static final String DATA_ENTITY = "[data_entity_name]";
