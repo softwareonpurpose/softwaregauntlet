@@ -1,9 +1,9 @@
 group 'com.softwareonpurpose'
-version '1.0.6'
+version '1.0.7'
 
 apply plugin: 'java'
 
-sourceCompatibility = 1.9
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -18,13 +18,13 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-java:3.11.0'
     compile 'org.jboss.resteasy:resteasy-jaxrs:3.1.4.Final'
     compile 'org.jboss.resteasy:resteasy-client:3.1.4.Final'
-    compile files('./src/main/resources/coverage4test-1.0.0.jar')
-    compile files('./src/main/resources/uinavigator-1.0.3.jar')
+    compile files('./src/main/resources/coverage4test-1.0.1.jar')
+    compile files('./src/main/resources/uinavigator-1.0.4.jar')
     compile files('./src/main/resources/validator4test-1.0.1.jar')
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.3.1'
+    gradleVersion = '4.8'
 }
 
 test {
