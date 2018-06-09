@@ -34,13 +34,12 @@ import java.util.stream.Collectors;
 public abstract class GauntletTest {
 
     private final CoverageReport report;
-    private final String classname;
     private Logger logger;
     private String testMethodName;
     private String requirements;
 
     protected GauntletTest() {
-        this.classname = this.getClass().getSimpleName();
+        String classname = this.getClass().getSimpleName();
         report = CoverageReport.construct(classname.replace("Test", ""));
         Validator.setStyle(Validator.ValidationLoggingStyle.BDD);
         initializeUiHost();
@@ -87,14 +86,15 @@ public abstract class GauntletTest {
         if (result.getParameters().length == 0) {
             return null;
         }
-        StringBuilder scenario = new StringBuilder();
+        StringBuilder scenarioBuilder = new StringBuilder();
         for (Object participant : result.getParameters()) {
             String participantDescription = participant.toString().replace("\\\"", "\"");
             String formattedDescription = participantDescription.substring(0, 1).equals("{") ? participantDescription
                     : String.format("{%s}", participantDescription);
-            scenario.append(formattedDescription);
+            scenarioBuilder.append(formattedDescription);
         }
-        return scenario.toString();
+        String scenario = scenarioBuilder.toString();
+        return scenario.lastIndexOf(",") >= 0 ? scenario.substring(0, scenario.lastIndexOf(",")) : scenario;
     }
 
     @AfterClass(alwaysRun = true)
@@ -124,7 +124,7 @@ public abstract class GauntletTest {
 
     @SuppressWarnings("WeakerAccess")
     protected void confirm(String testResult) {
-        Assert.assertTrue(testResult.equals(Validator.PASS), testResult);
+        Assert.assertEquals(testResult, Validator.PASS, testResult);
         getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n",
                 getTestMethodName()));
     }
@@ -150,8 +150,7 @@ public abstract class GauntletTest {
 
         public static final String EVT = "evt";                 //  Environment Validation Test
         public static final String DEV = "under_development";   //  Test being developed and/or debugged
-        public static final String PRODUCTION = "production";   //  Benign (alters NO source data) executable in
-        // Production
+        public static final String PRODUCTION = "production";   //  Benign (alters NO source data) executable in Production
         public static final String RELEASE = "release";         //  Test critical to validating Release Readiness
         public static final String SPRINT = "sprint";           //  Validates acceptance criteria for current sprint
     }
@@ -192,5 +191,4 @@ public abstract class GauntletTest {
         public static final String VIEW = "view";
         public static final String DATA_ENTITY = "[data_entity_name]";
     }
-
 }
