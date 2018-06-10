@@ -13,10 +13,10 @@
    limitations under the License.*/
 package com.softwareonpurpose.gauntlet;
 
+import com.softwareonpurpose.calibrator4test.Calibrator;
 import com.softwareonpurpose.coverage4test.CoverageReport;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.driver.DefaultIeInstantiation;
-import com.softwareonpurpose.validator4test.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -41,7 +41,7 @@ public abstract class GauntletTest {
     protected GauntletTest() {
         String classname = this.getClass().getSimpleName();
         report = CoverageReport.construct(classname.replace("Test", ""));
-        Validator.setStyle(Validator.ValidationLoggingStyle.BDD);
+        Calibrator.setStyle(Calibrator.CalibrationLoggingStyle.BDD);
         initializeUiHost();
     }
 
@@ -124,7 +124,7 @@ public abstract class GauntletTest {
 
     @SuppressWarnings("WeakerAccess")
     protected void confirm(String testResult) {
-        Assert.assertEquals(testResult, Validator.PASS, testResult);
+        Assert.assertEquals(testResult, Calibrator.PASS, testResult);
         getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n",
                 getTestMethodName()));
     }

@@ -1,5 +1,5 @@
 group 'com.softwareonpurpose'
-version '1.0.7'
+version '1.0.8'
 
 apply plugin: 'java'
 
@@ -20,7 +20,7 @@ dependencies {
     compile 'org.jboss.resteasy:resteasy-client:3.1.4.Final'
     compile files('./src/main/resources/coverage4test-1.0.1.jar')
     compile files('./src/main/resources/uinavigator-1.0.4.jar')
-    compile files('./src/main/resources/validator4test-1.0.1.jar')
+    compile files('./src/main/resources/calibrator4test-1.0.2.jar')
 }
 
 task wrapper(type: Wrapper) {
