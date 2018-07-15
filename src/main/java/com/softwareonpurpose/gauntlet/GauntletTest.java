@@ -40,7 +40,7 @@ public abstract class GauntletTest {
 
     protected GauntletTest() {
         String classname = this.getClass().getSimpleName();
-        report = CoverageReport.construct(classname.replace("Test", ""));
+        report = CoverageReport.getInstance(classname.replace("Test", ""));
         Calibrator.setStyle(Calibrator.CalibrationLoggingStyle.BDD);
         initializeUiHost();
     }
