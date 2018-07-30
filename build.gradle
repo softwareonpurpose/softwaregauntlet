@@ -1,5 +1,5 @@
 group 'com.softwareonpurpose'
-version '1.0.12'
+version '1.0.13'
 
 apply plugin: 'java'
 
@@ -19,7 +19,7 @@ dependencies {
     compile 'org.jboss.resteasy:resteasy-jaxrs:3.6.0.Final'
     compile 'org.jboss.resteasy:resteasy-client:3.6.0.Final'
     compile files('./src/main/resources/coverage4test-1.0.6.jar')
-    compile files('./src/main/resources/uinavigator-1.1.1.jar')
+    compile files('./src/main/resources/uinavigator-1.1.2.jar')
     compile files('./src/main/resources/calibrator4test-1.0.2.jar')
 }
 
