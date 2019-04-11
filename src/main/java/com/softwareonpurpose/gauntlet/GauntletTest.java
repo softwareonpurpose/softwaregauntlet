@@ -41,7 +41,6 @@ public abstract class GauntletTest {
     protected GauntletTest() {
         String classname = this.getClass().getSimpleName();
         report = CoverageReport.getInstance(classname.replace("Test", ""));
-        Calibrator.setStyle(Calibrator.CalibrationLoggingStyle.BDD);
         initializeUiHost();
     }
 
@@ -124,7 +123,7 @@ public abstract class GauntletTest {
 
     @SuppressWarnings("WeakerAccess")
     protected void confirm(String testResult) {
-        Assert.assertEquals(testResult, Calibrator.PASS, testResult);
+        Assert.assertEquals(testResult, Calibrator.SUCCESS, testResult);
         getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n",
                 getTestMethodName()));
     }
