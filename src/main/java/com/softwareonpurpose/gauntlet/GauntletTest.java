@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class GauntletTest {
-
     private final CoverageReport report;
     private Logger logger;
     private String testMethodName;
@@ -145,10 +144,9 @@ public abstract class GauntletTest {
     }
 
     @SuppressWarnings("unused")
-    protected class TestType {
-
+    protected class TestSuite {
         public static final String EVT = "evt";                 //  Environment Validation Test
-        public static final String DEV = "under_development";   //  Test being developed and/or debugged
+        public static final String DEBUG = "under_development"; //  Test being developed and/or debugged
         public static final String PRODUCTION = "production";   //  Benign (alters NO source data) executable in Production
         public static final String RELEASE = "release";         //  Test critical to validating Release Readiness
         public static final String SPRINT = "sprint";           //  Validates acceptance criteria for current sprint
@@ -179,15 +177,5 @@ public abstract class GauntletTest {
     public class Database {
 
         //  public final static String DATABASE_NAME = "[database name]";
-    }
-
-    /**
-     * Validation targets
-     */
-    @SuppressWarnings("unused")
-    public class TestSubject {
-
-        public static final String VIEW = "view";
-        public static final String DATA_ENTITY = "[data_entity_name]";
     }
 }
