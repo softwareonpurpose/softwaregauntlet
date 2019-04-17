@@ -4,7 +4,7 @@ apply plugin: 'java'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-version '1.0.15'
+version '1.0.16'
 
 repositories {
     mavenCentral()
@@ -31,6 +31,12 @@ dependencies {
 
 wrapper() {
     gradleVersion = '5.3.1'
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'softwaregauntlet', 'Implementation-Version': version
+    }
 }
 
 task configureJavadoc {
