@@ -2,7 +2,7 @@
 Automation framework for the testing of any site or service.  The framework is designed to provide comprehensive, reliable, efficient, effective and resilient validation with a reasonably sized test library.
 
 # Onboarding (Windows)
-In a PowerShell console, execute 'onboarding.ps1' found at the root of the repository.  
+In a PowerShell console, execute 'Install-GauntletWorkstation.ps1' found at the root of the repository.  
 It will require restarting the console multiple times to complete each install.
  - PowerShell (5.0)
  - Chocolatey
@@ -10,6 +10,16 @@ It will require restarting the console multiple times to complete each install.
  - Git
  - PoshGit (powershell support for Git)
  - IntelliJ
+
+# Onboarding (Mac)
+In a Terminal console, execute 'Install-Gauntlet-Mac.sh' found at the root of the repository.  
+ - HomeBrew
+ - JDK8 (Java 1.8)
+ - Git
+ - Gradle
+ - IntelliJ
+
+Gradle may not be set in the Path so you will need to run: 'sudo chmod 755 gradlew' then ./gradlew clean should work.
 
 # Test Execution
 In a console, in the project directory:
