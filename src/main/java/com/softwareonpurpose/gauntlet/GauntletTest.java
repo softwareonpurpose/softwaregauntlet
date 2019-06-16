@@ -36,6 +36,7 @@ public abstract class GauntletTest {
     private Logger logger;
     private String testMethodName;
     private String requirements;
+    private long updatedVerificationCount;
 
     protected GauntletTest() {
         String classname = this.getClass().getSimpleName();
@@ -97,6 +98,7 @@ public abstract class GauntletTest {
 
     @AfterClass(alwaysRun = true)
     public void writeCoverageReport() {
+        report.verificationCount(updatedVerificationCount);
         report.write();
     }
 
@@ -116,8 +118,10 @@ public abstract class GauntletTest {
     }
 
     @SuppressWarnings("unused")
-    protected void then(String testResult) {
-        confirm(testResult);
+    protected void then(Calibrator calibrator) {
+        String calibration = calibrator.calibrate();
+        updatedVerificationCount = Calibrator.getVerificationCount();
+        confirm(calibration);
     }
 
     @SuppressWarnings("WeakerAccess")
