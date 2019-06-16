@@ -4,7 +4,7 @@ apply plugin: 'java'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-version '1.1.0'
+version '1.1.1'
 
 repositories {
     mavenCentral()
@@ -23,10 +23,10 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-java:3.+'
     compile 'org.jboss.resteasy:resteasy-jaxrs:3.7.+'
     compile 'org.jboss.resteasy:resteasy-client:3.7+'
-    compile files('./src/main/resources/coverage4test-1.1.0.jar')
-    compile files('./src/main/resources/uinavigator-2.0.0.jar')
+    compile files('./src/main/resources/coverage4test-1.1.1.jar')
+    compile files('./src/main/resources/uinavigator-2.0.2.jar')
     compile files('./src/main/resources/calibrator4test-1.4.0.jar')
-    compile files('./src/main/resources/indentmanager-1.0.5.jar')
+    compile files('./src/main/resources/indentmanager-1.0.6.jar')
     asciidoclet 'org.asciidoctor:asciidoclet:1.+'
 }
 
