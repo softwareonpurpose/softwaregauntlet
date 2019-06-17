@@ -120,7 +120,7 @@ public abstract class GauntletTest {
     @SuppressWarnings("unused")
     protected void then(Calibrator calibrator) {
         String calibration = calibrator.calibrate();
-        updatedVerificationCount = Calibrator.getVerificationCount();
+        updatedVerificationCount = calibrator.getVerificationCount();
         confirm(calibration);
     }
 
