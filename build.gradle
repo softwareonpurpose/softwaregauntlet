@@ -4,7 +4,7 @@ apply plugin: 'java'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-version '1.1.1'
+version '1.1.2'
 
 repositories {
     mavenCentral()
@@ -24,8 +24,8 @@ dependencies {
     compile 'org.jboss.resteasy:resteasy-jaxrs:3.7.+'
     compile 'org.jboss.resteasy:resteasy-client:3.7+'
     compile files('./src/main/resources/coverage4test-1.2.0.jar')
-    compile files('./src/main/resources/uinavigator-2.0.2.jar')
-    compile files('./src/main/resources/calibrator4test-1.4.1.jar')
+    compile files('./src/main/resources/uinavigator-2.0.3.jar')
+    compile files('./src/main/resources/calibrator4test-1.4.2.jar')
     compile files('./src/main/resources/indentmanager-1.0.6.jar')
     asciidoclet 'org.asciidoctor:asciidoclet:1.+'
 }
