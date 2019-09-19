@@ -13,20 +13,32 @@
    limitations under the License.*/
 package com.softwareonpurpose.gauntlet.environment;
 
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+@SuppressWarnings("unused")
 public class Environment {
+    private static Environment environment;
+    @SuppressWarnings({"FieldCanBeLocal", "MismatchedQueryAndUpdateOfCollection"})
+    private final Properties properties = new Properties();
 
-    private static EnvironmentDefinition environment;
-
-    private Environment() {
+    private Environment(InputStream inputStream) {
+        try {
+            properties.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static EnvironmentDefinition getInstance() {
+    public static Environment getInstance() {
         if (environment == null) {
-            String environment = System.getProperty("env");
-            switch (environment) {
-                default:
-                    Environment.environment = ProductionEnvironment.getInstance();
-            }
+            String env = System.getProperty("env");
+            LoggerFactory.getLogger(Environment.class).error("System Property 'env' NOT SET (e.g. 'dev')");
+            InputStream inputStream = Environment.class.getClassLoader().getResourceAsStream(String.format("%s.properties", env));
+            environment = new Environment(inputStream);
         }
         return environment;
     }
