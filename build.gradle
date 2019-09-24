@@ -4,7 +4,7 @@ apply plugin: 'java'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-version '1.2.0'
+version '1.2.1'
 
 repositories {
     mavenCentral()
@@ -38,19 +38,6 @@ jar {
     manifest {
         attributes 'Implementation-Title': 'softwaregauntlet', 'Implementation-Version': version
     }
-}
-
-task configureJavadoc {
-    doLast {
-        javadoc {
-            options.doclet = 'org.asciidoctor.Asciidoclet'
-            options.docletpath = configurations.asciidoclet.files.toList()
-        }
-    }
-}
-
-javadoc {
-    dependsOn configureJavadoc
 }
 
 test {
