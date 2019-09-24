@@ -11,7 +11,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.*/
-package com.softwareonpurpose.gauntlet.environment;
+package com.softwareonpurpose.gauntlet;
 
 import org.slf4j.LoggerFactory;
 
@@ -19,27 +19,43 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-@SuppressWarnings("unused")
 public class Environment {
     private static Environment environment;
-    @SuppressWarnings({"FieldCanBeLocal", "MismatchedQueryAndUpdateOfCollection"})
     private final Properties properties = new Properties();
 
-    private Environment(InputStream inputStream) {
-        try {
-            properties.load(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
+    Environment(InputStream inputStream) {
+        if (inputStream != null) {
+            try {
+                properties.load(inputStream);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
+    /**
+     * System Property 'env' is used to initialize Environment to resources/[env].properties
+     * @return Environment
+     */
     public static Environment getInstance() {
         if (environment == null) {
             String env = System.getProperty("env");
-            LoggerFactory.getLogger(Environment.class).error("System Property 'env' NOT SET (e.g. 'dev')");
-            InputStream inputStream = Environment.class.getClassLoader().getResourceAsStream(String.format("%s.properties", env));
+            InputStream inputStream = null;
+            try {
+                inputStream = Environment.class.getClassLoader().getResourceAsStream(String.format("%s.properties", env));
+            } catch (Exception e) {
+                LoggerFactory.getLogger(Environment.class).error("System Property 'env' NOT SET (e.g. \"dev\" for a 'dev' environment)");
+            }
             environment = new Environment(inputStream);
         }
         return environment;
+    }
+
+    static void clear() {
+        environment=null;
+    }
+
+    String getProperty(String key) {
+        return properties.getProperty(key);
     }
 }
