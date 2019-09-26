@@ -120,7 +120,7 @@ public abstract class GauntletTest {
     @SuppressWarnings("unused")
     protected void then(Calibrator calibrator) {
         String calibration = calibrator.calibrate();
-        updatedVerificationCount = calibrator.getVerificationCount();
+        updatedVerificationCount += calibrator.getVerificationCount();
         confirm(calibration);
     }
 
@@ -145,6 +145,10 @@ public abstract class GauntletTest {
     @SuppressWarnings("WeakerAccess")
     protected void setRequirements(@SuppressWarnings("SameParameterValue") String requirements) {
         this.requirements = requirements;
+    }
+
+    long getVerificationCount() {
+        return updatedVerificationCount;
     }
 
     @SuppressWarnings("unused")
