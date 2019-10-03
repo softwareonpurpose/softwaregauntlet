@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-@Test(enabled = true)
+@Test(enabled = false)
 public class VerifyCountSingleTestMultiExecParCalibratorTest extends GauntletTest {
     @DataProvider
     public static Object[][] scenarios() {
@@ -16,7 +16,7 @@ public class VerifyCountSingleTestMultiExecParCalibratorTest extends GauntletTes
         };
     }
 
-    @Test(enabled = true, dataProvider = "scenarios")
+    @Test(enabled = false, dataProvider = "scenarios")
     public void verificationCount_multipleExecutions(long expected) {
         AnObjectExpected expectedObject = AnObjectExpected.getInstance();
         AnObject actualObject = AnObject.getInstance();

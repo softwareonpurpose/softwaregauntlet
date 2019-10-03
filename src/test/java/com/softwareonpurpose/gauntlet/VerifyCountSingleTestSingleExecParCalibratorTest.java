@@ -4,9 +4,8 @@ import com.softwareonpurpose.gauntlet.anobject.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@Test
-public class VerifyCountSingleTestSingleExecParCalibratorTest extends GauntletTest{
-    @Test(enabled = true)
+@Test(enabled = false)
+public class VerifyCountSingleTestSingleExecParCalibratorTest extends GauntletTest {
     public void verificationCount_singleTestMethodExecution() {
         AnObjectExpected expectedObject = AnObjectExpected.getInstance();
         AnObject actualObject = AnObject.getInstance();

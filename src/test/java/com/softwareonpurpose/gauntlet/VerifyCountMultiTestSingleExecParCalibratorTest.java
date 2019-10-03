@@ -4,9 +4,8 @@ import com.softwareonpurpose.gauntlet.anobject.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@Test
-public class VerifyCountMultiTestSingleExecParCalibratorTest extends GauntletTest{
-    @Test(enabled = true)
+@Test(enabled = false)
+public class VerifyCountMultiTestSingleExecParCalibratorTest extends GauntletTest {
     public void verificationCount_testMethodOneExecution() {
         AnObjectExpected expectedObject = AnObjectExpected.getInstance();
         AnObject actualObject = AnObject.getInstance();
@@ -18,6 +17,7 @@ public class VerifyCountMultiTestSingleExecParCalibratorTest extends GauntletTes
         long actual = getVerificationCount();
         Assert.assertEquals(actual, expected, "FAILED to calculate accurate verification count");
     }
+
     public void verificationCount_testMethodTwoExecution() {
         AnObjectExpected expectedObject = AnObjectExpected.getInstance();
         AnObject actualObject = AnObject.getInstance();
