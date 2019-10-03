@@ -7,7 +7,7 @@ public class AnObjectCalibrator extends Calibrator {
     private final AnObjectExpected expected;
     private final AnObject actual;
 
-    protected AnObjectCalibrator(AnObjectExpected expected, AnObject actual) {
+    private AnObjectCalibrator(AnObjectExpected expected, AnObject actual) {
         super(DESCRIPTION, expected, actual);
         this.expected = expected;
         this.actual = actual;
