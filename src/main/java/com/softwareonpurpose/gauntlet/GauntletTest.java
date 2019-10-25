@@ -126,7 +126,7 @@ public abstract class GauntletTest {
 
     @SuppressWarnings("WeakerAccess")
     protected void confirm(String testResult) {
-        Assert.assertEquals(testResult, Calibrator.SUCCESS, testResult);
+        Assert.assertEquals(testResult, Calibrator.SUCCESS);
         getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n",
                 getTestMethodName()));
     }
@@ -183,6 +183,7 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class Database {
+        public static final String METADATA = "metadata";
 
         //  public final static String DATABASE_NAME = "[database name]";
     }
