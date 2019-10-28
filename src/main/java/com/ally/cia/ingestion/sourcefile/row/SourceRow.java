@@ -11,6 +11,10 @@ public class SourceRow {
     private static char SEPARATOR;
 
     public SourceRow(String data) {
+        NOTE:
+        /*  This value (the delimiter) is actually acquired from the 'Metadata' database for a specific JobID
+            Leave for now -- later we'll do refactoring to reflect this
+         */
         SEPARATOR = Environment.getInstance().getProperty("separator").toCharArray()[0];
         rowData = data;
     }
@@ -20,6 +24,17 @@ public class SourceRow {
         String[] values = splitDelimitedValues(rowData);
         for (int i = 0; i < formatPatterns.size(); i++) {
             if (i <= values.length) {
+                NOTE:
+                /*  This is helpful code, which later we will be refactoring into 'Transformer' objects
+                    each for a specific data type.
+                    The 'TYPE' data acquired from the 'Metadata' tables will be used in construction of each
+                    'Transformer' object, which will initialize the appropriate 'TransformerBehavior'
+                    (based on the Strategy pattern).
+
+                    I don't yet know if there is a standard approach to how the source files are formatted,
+                    but from my understanding, the details for the expected format are all in the 'Metadata' tables.
+                    I'll be able to confirm this as we get deeper into our code.
+                 */
                 try {
                     // removing leading and trailing quote
                     values[i] = values[i].trim().replaceAll("^\"|\"$", "");
@@ -36,6 +51,10 @@ public class SourceRow {
 
     private static String[] splitDelimitedValues(String line)
     {
+        NOTE:
+        /*  Again, this is good code, which we will be refactoring into another class.
+         */
+
         List<String> result = new ArrayList<>();
         StringBuilder currentStr = new StringBuilder();
         boolean inQuotes = false;
