@@ -7,8 +7,11 @@ import org.testng.annotations.Test;
 public class SourceFileTest extends GauntletTest {
     @Test(groups = {TestSuite.EVT})
     public void smoke() {
-        SourceFileSchema expected = SourceFileSchema.getInstance();
+        System.setProperty("env", "sourceFiletest");
+
+        SourceFileSchema expected = SourceFileSchema.getSourceFileSchema(9);
         SourceFile actual = SourceFile.getInstance(9);
+
         then(SourceFileCalibrator.getInstance(expected, actual));
     }
 }
