@@ -26,8 +26,10 @@ public class SourceFile {
     List<SourceRow> getRows() {
         List<SourceRow> sourceRows = new ArrayList<>();
         try {
-            final String line = bufferedReader.readLine();
-            sourceRows.add(new SourceRow(line));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                sourceRows.add(new SourceRow(line));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

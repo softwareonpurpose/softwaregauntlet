@@ -10,6 +10,10 @@ public class SourceRow {
     private String rowData;
     private static char SEPARATOR;
 
+    public String getRowData() {
+        return rowData;
+    }
+
     public SourceRow(String data) {
         /*  This value (the delimiter) is actually acquired from the 'Metadata' database for a specific JobID
             Leave for now -- later we'll do refactoring to reflect this

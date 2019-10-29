@@ -24,9 +24,9 @@ public class SourceFileCalibrator extends Calibrator {
     @Override
     protected void executeVerifications() {
         List<String> formatPatterns = new ArrayList<>(expectedSchema.getSchemaMap(9).values());
-
+        int rownum = 0;
         for(SourceRow row:actual.getRows()){
-            verify("Is Transformable", true, row.isTransformable(formatPatterns));
+            verify(String.format("Line %d is transformable: %s", ++rownum, row.getRowData()), rownum != 2 && rownum != 5, row.isTransformable(formatPatterns));
         }
     }
 }
