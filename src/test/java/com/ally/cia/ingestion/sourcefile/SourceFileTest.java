@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 public class SourceFileTest extends GauntletTest {
     @Test(groups = {TestSuite.EVT})
     public void smoke() {
-        NOTE:
         /*  The 'ENV' property is expected to be the development/testing environment being tested against
             (e.g. 'Dev', 'Test', 'Stage', 'Production').
 

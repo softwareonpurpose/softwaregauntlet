@@ -11,7 +11,6 @@ public class SourceRow {
     private static char SEPARATOR;
 
     public SourceRow(String data) {
-        NOTE:
         /*  This value (the delimiter) is actually acquired from the 'Metadata' database for a specific JobID
             Leave for now -- later we'll do refactoring to reflect this
          */
@@ -24,7 +23,6 @@ public class SourceRow {
         String[] values = splitDelimitedValues(rowData);
         for (int i = 0; i < formatPatterns.size(); i++) {
             if (i <= values.length) {
-                NOTE:
                 /*  This is helpful code, which later we will be refactoring into 'Transformer' objects
                     each for a specific data type.
                     The 'TYPE' data acquired from the 'Metadata' tables will be used in construction of each
@@ -51,7 +49,6 @@ public class SourceRow {
 
     private static String[] splitDelimitedValues(String line)
     {
-        NOTE:
         /*  Again, this is good code, which we will be refactoring into another class.
          */
 
