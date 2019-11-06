@@ -2,7 +2,7 @@
     [switch]$Version
 };
 if($Version){return '0.3'};
-SetExecutionPolicy Bypass -Scope Process -Force
+Set-ExecutionPolicy Bypass -Scope Process -Force
 $wc = New-Object System.Net.WebClient;
 $wc.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials;
 iex ($wc.DownloadString('https://chocolatey.org/install.ps1'));
