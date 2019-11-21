@@ -16,4 +16,9 @@ public class LandingViewExpected implements LandingViewCalibratable {
     public NavBarPrimaryMenuExpected inNavBarPrimaryMenu() {
         return NavBarPrimaryMenuExpected.getInstance();
     }
+
+    @Override
+    public Boolean isHubSpotMessagesButtonDisplayed() {
+        return true;
+    }
 }

@@ -25,5 +25,6 @@ public class LandingViewCalibrator extends Calibrator {
     @Override
     protected void executeVerifications() {
         verify("Try for free' button exists", expected.isTryForFreeDisplayed(), actual.isTryForFreeDisplayed());
+        verify("'HubSpot Messages' icon displayed", expected.isHubSpotMessagesButtonDisplayed(), actual.isHubSpotMessagesButtonDisplayed());
     }
 }

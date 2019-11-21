@@ -5,8 +5,6 @@ import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.UiView;
 import com.trp.icescrum.view.landing.region.navbarmenu.NavBarPrimaryMenu;
-import com.trp.icescrum.view.landing.region.navbarmenu.NavBarPrimaryMenuCalibratable;
-import org.apache.http.conn.routing.RouteInfo;
 
 public class LandingView extends UiView implements LandingViewCalibratable {
     private static final String VIEW_URI = Environment.getInstance().getDomainUrl();
@@ -39,6 +37,15 @@ public class LandingView extends UiView implements LandingViewCalibratable {
     @Override
     public NavBarPrimaryMenu inNavBarPrimaryMenu() {
         return NavBarPrimaryMenu.getInstance(this.getElement());
+    }
+
+    @Override
+    public Boolean isHubSpotMessagesButtonDisplayed() {
+        return getHubSpotButtonElement().waitUntilVisible();
+    }
+
+    private UiElement getHubSpotButtonElement() {
+        return UiElement.getInstance("'HubSpot Messages' button", UiElement.LocatorType.ID, "hubspot-messages-iframe-container", this.getElement());
     }
 
     private UiElement getTryForFreeButtonElement() {

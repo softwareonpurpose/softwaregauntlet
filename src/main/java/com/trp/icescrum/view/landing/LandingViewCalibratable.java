@@ -6,4 +6,6 @@ public interface LandingViewCalibratable {
     Boolean isTryForFreeDisplayed();
 
     NavBarPrimaryMenuCalibratable inNavBarPrimaryMenu();
+
+    Boolean isHubSpotMessagesButtonDisplayed();
 }
