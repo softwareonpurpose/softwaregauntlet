@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 @Test(groups={GauntletTest.TestSuite.UNIT})
 public class VerifyCountMultiTestSingleExecNodeCalibratorTest extends GauntletTest {
-    @Test()
     public void verificationCount_testMethodOne() {
         AnObjectExpected expectedObject = AnObjectExpected.getInstance();
         AnObject actualObject = AnObject.getInstance();
