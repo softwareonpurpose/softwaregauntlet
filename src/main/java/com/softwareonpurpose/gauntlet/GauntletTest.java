@@ -158,6 +158,7 @@ public abstract class GauntletTest {
         public static final String PRODUCTION = "production";   //  Benign (alters NO source data) executable in Production
         public static final String RELEASE = "release";         //  Test critical to validating Release Readiness
         public static final String SPRINT = "sprint";           //  Validates acceptance criteria for current sprint
+        public static final String UNIT = "unit";               //  Unit tests of Software Gauntlet classes
     }
 
     /**
