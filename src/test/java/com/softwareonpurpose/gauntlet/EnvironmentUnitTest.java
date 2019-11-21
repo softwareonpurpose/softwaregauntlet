@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-@Test(enabled = false)
+@Test(groups={GauntletTest.TestSuite.UNIT})
 public class EnvironmentUnitTest {
     public void getKeyFromUninitializedEnvironment() {
         String expected = null;
