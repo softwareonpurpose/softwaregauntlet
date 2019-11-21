@@ -3,7 +3,7 @@ package com.softwareonpurpose.gauntlet;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@Test(enabled = false)
+@Test(groups={GauntletTest.TestSuite.UNIT})
 public class EnvironmentIntegrationTest {
     public void smoke() {
         Environment.clear();
