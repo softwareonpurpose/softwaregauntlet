@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-@Test(enabled = false)
+@Test(groups=GauntletTest.TestSuite.UNIT)
 public class VerifyCountMultiTestMultiExecParCalibratorTest extends GauntletTest {
     @DataProvider
     public static Object[][] scenarios_test1() {
@@ -25,7 +25,7 @@ public class VerifyCountMultiTestMultiExecParCalibratorTest extends GauntletTest
         };
     }
 
-    @Test(enabled = false, dataProvider = "scenarios_test1")
+    @Test(dataProvider = "scenarios_test1")
     public void verificationCount_multipleExecutionsTest1(long expected) {
         AnObjectExpected expectedObject = AnObjectExpected.getInstance();
         AnObject actualObject = AnObject.getInstance();
@@ -37,7 +37,7 @@ public class VerifyCountMultiTestMultiExecParCalibratorTest extends GauntletTest
         Assert.assertEquals(actual, expected, "FAILED to calculate accurate verification count");
     }
 
-    @Test(enabled = false, dataProvider = "scenarios_test2")
+    @Test(dataProvider = "scenarios_test2")
     public void verificationCount_multipleExecutionsTest2(long expected) {
         AnObjectExpected expectedObject = AnObjectExpected.getInstance();
         AnObject actualObject = AnObject.getInstance();
