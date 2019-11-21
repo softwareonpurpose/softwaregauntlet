@@ -126,7 +126,7 @@ public abstract class GauntletTest {
 
     @SuppressWarnings("WeakerAccess")
     protected void confirm(String testResult) {
-        Assert.assertEquals(testResult, Calibrator.SUCCESS, testResult);
+        Assert.assertEquals(testResult, Calibrator.SUCCESS);
         getLogger().info(String.format("%n==========   '%s' test completed successfully   ==========%n",
                 getTestMethodName()));
     }
@@ -165,6 +165,7 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class Application {
+        public static final String ICE_SCRUM = "ice_scrum";
 
         //  public final static String APPLICATION_NAME = "[application name]";
     }
@@ -174,6 +175,7 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class View {
+        public static final String LANDING = "landing";
 
         //  public final static String VIEW_NAME = "[view name]";
     }

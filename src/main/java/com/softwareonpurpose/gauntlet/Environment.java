@@ -35,11 +35,13 @@ public class Environment {
 
     /**
      * System Property 'env' is used to initialize Environment to resources/[env].properties
+     *
      * @return Environment
      */
     public static Environment getInstance() {
         if (environment == null) {
             String env = System.getProperty("env");
+            env = env == null || "".equals(env) ? "prod" : env;
             InputStream inputStream = null;
             try {
                 inputStream = Environment.class.getClassLoader().getResourceAsStream(String.format("%s.properties", env));
@@ -52,10 +54,14 @@ public class Environment {
     }
 
     static void clear() {
-        environment=null;
+        environment = null;
     }
 
     String getProperty(String key) {
         return properties.getProperty(key);
+    }
+
+    public String getDomainUrl() {
+        return String.format("http://%s", properties.getProperty("domain_url"));
     }
 }
