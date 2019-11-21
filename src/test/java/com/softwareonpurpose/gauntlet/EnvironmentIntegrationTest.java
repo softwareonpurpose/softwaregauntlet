@@ -16,7 +16,7 @@ public class EnvironmentIntegrationTest {
     public void noEnvironmentSpecified() {
         Environment.clear();
         System.clearProperty("env");
-        String expected = null;
+        String expected = "icescrum.com";
         String actual = Environment.getInstance().getProperty("domain_url");
         Assert.assertEquals(actual, expected, "Failed to load/return expected property");
     }
