@@ -40,7 +40,12 @@ test {
     systemProperties['lang'] = System.properties["lang"]
     systemProperties['host'] = System.properties["host"]
     maxParallelForks = 4
-    useTestNG()
+
+    def groupsToExclude = []
+    groupsToExclude.add('unit')
+    useTestNG() {
+        groupsToExclude.each { String group -> excludeGroups group }
+    }
 }
 
 task debug(type: Test) {
@@ -50,10 +55,13 @@ task debug(type: Test) {
     systemProperties['host'] = System.properties["host"]
     maxParallelForks = 4
 
+    def groupsToExclude = []
+    groupsToExclude.add('unit')
     def groupsToInclude = []
     groupsToInclude.add('under_development')
     useTestNG() {
         groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
@@ -64,10 +72,13 @@ task evt(type: Test) {
     systemProperties['host'] = System.properties["host"]
     maxParallelForks = 4
 
+    def groupsToExclude = []
+    groupsToExclude.add('unit')
     def groupsToInclude = []
     groupsToInclude.add('evt')
     useTestNG() {
         groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
@@ -78,11 +89,14 @@ task bvt(type: Test) {
     systemProperties['host'] = System.properties["host"]
     maxParallelForks = 4
 
+    def groupsToExclude = []
+    groupsToExclude.add('unit')
     def groupsToInclude = []
     groupsToInclude.add('evt')
     groupsToInclude.add('under_development')
     useTestNG() {
         groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
@@ -93,10 +107,13 @@ task sprint(type: Test) {
     systemProperties['host'] = System.properties["host"]
     maxParallelForks = 4
 
+    def groupsToExclude = []
+    groupsToExclude.add('unit')
     def groupsToInclude = []
     groupsToInclude.add('sprint')
     useTestNG() {
         groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
@@ -107,10 +124,13 @@ task release(type: Test) {
     systemProperties['host'] = System.properties["host"]
     maxParallelForks = 4
 
+    def groupsToExclude = []
+    groupsToExclude.add('unit')
     def groupsToInclude = []
     groupsToInclude.add('release')
     useTestNG() {
         groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
@@ -121,18 +141,23 @@ task production(type: Test) {
     systemProperties['host'] = System.properties["host"]
     maxParallelForks = 4
 
+    def groupsToExclude = []
+    groupsToExclude.add('unit')
     def groupsToInclude = []
     groupsToInclude.add('production')
     useTestNG() {
         groupsToInclude.each { String group -> includeGroups group }
+        groupsToExclude.each { String group -> excludeGroups group }
     }
 }
 
-task regression(type: Test) {
-    description = "All tests"
-    systemProperties['env'] = System.properties["env"]
-    systemProperties['lang'] = System.properties["lang"]
-    systemProperties['host'] = System.properties["host"]
+task unit(type: Test) {
+    description = "Unit tests"
     maxParallelForks = 4
-    useTestNG()
+
+    def groupsToInclude = []
+    groupsToInclude.add('unit')
+    useTestNG() {
+        groupsToInclude.each { String group -> includeGroups group }
+    }
 }
