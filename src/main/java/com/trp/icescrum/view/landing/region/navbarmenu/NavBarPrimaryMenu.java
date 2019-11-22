@@ -21,6 +21,11 @@ public class NavBarPrimaryMenu extends UiRegion implements NavBarPrimaryMenuCali
         return getLoginButtonElement().waitUntilVisible();
     }
 
+    @Override
+    public Boolean isLanguageSwitcherExpanded() {
+        return "true".equals(UiElement.getInstance("'Language' switcher", UiElement.LocatorType.CLASS, "language-switcher", this.getElement()).getAttribute("aria-expanded"));
+    }
+
     private UiElement getLoginButtonElement() {
         return UiElement.getInstance("'Login' button", UiElement.LocatorType.TAG, "a", "href", "https://www.icescrum.com/my-account/", this.getElement());
     }

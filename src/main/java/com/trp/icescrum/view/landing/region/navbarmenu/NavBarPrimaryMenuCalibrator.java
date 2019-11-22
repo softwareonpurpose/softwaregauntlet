@@ -20,5 +20,6 @@ public class NavBarPrimaryMenuCalibrator extends Calibrator {
     @Override
     protected void executeVerifications() {
         verify("Is 'Login' button displayed", expected.isLoginDisplayed(), actual.isLoginDisplayed());
+        verify("Is 'Language Switcher' expanded", expected.isLanguageSwitcherExpanded(), actual.isLanguageSwitcherExpanded());
     }
 }

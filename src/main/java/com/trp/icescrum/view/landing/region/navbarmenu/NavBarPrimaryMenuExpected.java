@@ -9,4 +9,9 @@ public class NavBarPrimaryMenuExpected implements NavBarPrimaryMenuCalibratable 
     public Boolean isLoginDisplayed() {
         return true;
     }
+
+    @Override
+    public Boolean isLanguageSwitcherExpanded() {
+        return false;
+    }
 }
