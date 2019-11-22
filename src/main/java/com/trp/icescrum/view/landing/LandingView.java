@@ -5,6 +5,7 @@ import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.UiView;
 import com.trp.icescrum.view.landing.region.navbarmenu.NavBarPrimaryMenu;
+import com.trp.icescrum.view.landing.region.hubspotmessages.HubSpotMessagesContainer;
 
 public class LandingView extends UiView implements LandingViewCalibratable {
     private static final String VIEW_URI = Environment.getInstance().getDomainUrl();
@@ -40,12 +41,8 @@ public class LandingView extends UiView implements LandingViewCalibratable {
     }
 
     @Override
-    public Boolean isHubSpotMessagesButtonDisplayed() {
-        return getHubSpotButtonElement().waitUntilVisible();
-    }
-
-    private UiElement getHubSpotButtonElement() {
-        return UiElement.getInstance("'HubSpot Messages' button", UiElement.LocatorType.ID, "hubspot-messages-iframe-container", this.getElement());
+    public HubSpotMessagesContainer inOverlay() {
+        return HubSpotMessagesContainer.getInstance(this.getElement());
     }
 
     private UiElement getTryForFreeButtonElement() {

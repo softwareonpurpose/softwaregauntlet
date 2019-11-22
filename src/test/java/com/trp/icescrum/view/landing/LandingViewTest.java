@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class LandingViewTest extends GauntletTest {
     @Test(groups = {TestSuite.EVT})
     public void smoke() {
-        setRequirements("US0001|US0002|US0003");
+        setRequirements("US0001|US0002|US0003|US0004");
         LandingViewExpected expected = LandingViewExpected.getInstance();
         LandingView actual = LandingView.directNav();
         then(LandingViewCalibrator.getInstance(expected, actual));

@@ -2,6 +2,7 @@ package com.trp.icescrum.view.landing;
 
 import com.softwareonpurpose.calibrator4test.Calibrator;
 import com.softwareonpurpose.uinavigator.UiRegion;
+import com.trp.icescrum.view.landing.region.hubspotmessages.HubSpotMessageContainerCalibrator;
 import com.trp.icescrum.view.landing.region.navbarmenu.NavBarPrimaryMenuCalibrator;
 
 public class LandingViewCalibrator extends Calibrator {
@@ -15,6 +16,7 @@ public class LandingViewCalibrator extends Calibrator {
         this.actual = actual;
         UiRegion.suppressConstructionLogging(true);
         addChildCalibrator(NavBarPrimaryMenuCalibrator.getInstance(expected.inNavBarPrimaryMenu(), actual.inNavBarPrimaryMenu()));
+        addChildCalibrator(HubSpotMessageContainerCalibrator.getInstance(expected.inOverlay(), actual.inOverlay()));
         UiRegion.suppressConstructionLogging(false);
     }
 
@@ -25,6 +27,5 @@ public class LandingViewCalibrator extends Calibrator {
     @Override
     protected void executeVerifications() {
         verify("Try for free' button exists", expected.isTryForFreeDisplayed(), actual.isTryForFreeDisplayed());
-        verify("'HubSpot Messages' icon displayed", expected.isHubSpotMessagesButtonDisplayed(), actual.isHubSpotMessagesButtonDisplayed());
     }
 }
