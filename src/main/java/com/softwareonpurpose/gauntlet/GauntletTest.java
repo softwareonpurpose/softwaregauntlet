@@ -15,8 +15,9 @@ package com.softwareonpurpose.gauntlet;
 
 import com.softwareonpurpose.calibrator4test.Calibrator;
 import com.softwareonpurpose.coverage4test.CoverageReport;
+import com.softwareonpurpose.gauntlet.uidriver.ChromeDriverInstantiation;
+import com.softwareonpurpose.uinavigator.DriverInstantiation;
 import com.softwareonpurpose.uinavigator.UiHost;
-import com.softwareonpurpose.uinavigator.driver.DefaultIeInstantiation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -32,6 +33,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class GauntletTest {
+    private static DriverInstantiation driverInstantiation;
     private final CoverageReport report;
     private Logger logger;
     private String testMethodName;
@@ -45,14 +47,10 @@ public abstract class GauntletTest {
     }
 
     private void initializeUiHost() {
-        String browser = System.getProperty("host");
-        if (browser != null) {
-            switch (browser) {
-                case "ie":
-                    UiHost.setDriverInstantiation(DefaultIeInstantiation.getInstance());
-                default:
-            }
+        if (driverInstantiation == null) {
+            driverInstantiation = ChromeDriverInstantiation.getInstance();
         }
+        UiHost.setDriverInstantiation(driverInstantiation);
     }
 
     @BeforeMethod(alwaysRun = true)
@@ -142,7 +140,6 @@ public abstract class GauntletTest {
         return logger;
     }
 
-    @SuppressWarnings("WeakerAccess")
     protected void setRequirements(@SuppressWarnings("SameParameterValue") String requirements) {
         this.requirements = requirements;
     }
@@ -177,6 +174,7 @@ public abstract class GauntletTest {
     @SuppressWarnings("unused")
     public class View {
         public static final String LANDING = "landing";
+        public static final String LOGIN_USER_PASS = "login_user_pass";
 
         //  public final static String VIEW_NAME = "[view name]";
     }
