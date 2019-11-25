@@ -1,6 +1,6 @@
 package com.icescrum.auth.module.core.data.user;
 
-public class User implements UserCalibratable {
+public class User extends UserCalibratable {
     private final UserDefinition mockUser;
 
     private User(UserDefinition userDefinition) {

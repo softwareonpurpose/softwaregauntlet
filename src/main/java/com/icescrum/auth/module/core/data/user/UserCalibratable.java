@@ -1,7 +1,14 @@
 package com.icescrum.auth.module.core.data.user;
 
-public interface UserCalibratable {
-    String getPassword();
+import com.google.gson.Gson;
 
-    String getUsername();
+abstract class UserCalibratable {
+    abstract String getPassword();
+
+    abstract String getUsername();
+
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
+    }
 }

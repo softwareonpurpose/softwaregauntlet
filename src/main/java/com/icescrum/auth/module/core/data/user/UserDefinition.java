@@ -1,6 +1,6 @@
 package com.icescrum.auth.module.core.data.user;
 
-public class UserDefinition implements UserCalibratable {
+public class UserDefinition extends UserCalibratable {
     private String username;
     private String password;
 
