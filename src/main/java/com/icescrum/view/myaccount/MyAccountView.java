@@ -10,7 +10,7 @@ public class MyAccountView extends UiView implements MyAccountViewCalibratable {
     private static final String LOCATOR_TYPE = UiElement.LocatorType.TAG;
     private static final String LOCATOR_VALUE = "body";
 
-    protected MyAccountView() {
+    public MyAccountView() {
         super(VIEW_URI, UiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE));
     }
 

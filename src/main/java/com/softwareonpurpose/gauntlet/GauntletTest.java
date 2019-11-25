@@ -175,6 +175,7 @@ public abstract class GauntletTest {
     public class View {
         public static final String LANDING = "landing";
         public static final String LOGIN_USER_PASS = "login_user_pass";
+        public static final String MY_ACCOUNT = "my_account";
 
         //  public final static String VIEW_NAME = "[view name]";
     }
