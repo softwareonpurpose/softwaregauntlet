@@ -20,4 +20,20 @@ public class User extends UserCalibratable {
     public String getUsername() {
         return mockUser.getUsername();
     }
+
+    public boolean equivalent(UserCalibratable userDefinition) {
+        if(userDefinition == null){
+            return false;
+        }
+        if(this.getUsername().equals(userDefinition.getUsername())){
+            return true;
+        }
+        boolean equivalent = isEquivalent(userDefinition.getUsername(), this.getUsername());
+        equivalent &= isEquivalent(userDefinition.getPassword(), this.getPassword());
+        return equivalent;
+    }
+
+    private boolean isEquivalent(String definitionUsername, String thisUsername) {
+        return definitionUsername == null || thisUsername.equals(definitionUsername);
+    }
 }

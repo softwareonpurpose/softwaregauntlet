@@ -12,7 +12,9 @@ import org.testng.annotations.Test;
 public class MyAccountViewTest extends GauntletTest {
     @DataProvider
     public static Object[][] smokeScenario() {
-        return new Object[][]{{UserDefinition.getInstance()}};
+        return new Object[][]{
+                {UserDefinition.getInstance()}
+        };
     }
 
     @Test(groups = {TestSuite.EVT}, dataProvider = "smokeScenario")

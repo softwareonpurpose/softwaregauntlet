@@ -1,5 +1,6 @@
 package com.icescrum.view.myaccount;
 
+import com.icescrum.view.myaccount.menu.MyAccountMenu;
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.UiView;
@@ -19,5 +20,10 @@ public class MyAccountView extends UiView implements MyAccountViewCalibratable {
         boolean confirmed = UiHost.getInstance().getUri().contains(VIEW_URI);
         confirmed &= this.getElement().waitUntilVisible();
         return confirmed;
+    }
+
+    @Override
+    public MyAccountMenu inMyAccountMenu() {
+        return MyAccountMenu.getInstance(this.getElement());
     }
 }

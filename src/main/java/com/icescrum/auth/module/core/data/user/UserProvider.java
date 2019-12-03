@@ -6,6 +6,10 @@ public class UserProvider {
     }
 
     public User get(UserDefinition userDefinition) {
-        return UserRepository.getInstance().get(userDefinition);
+        return UserRepository.getInstance().query(userDefinition);
+    }
+
+    public User get() {
+        return get(UserDefinition.getInstance());
     }
 }
