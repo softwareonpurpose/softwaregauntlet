@@ -19,6 +19,7 @@ public class MyAccountViewTest extends GauntletTest {
 
     @Test(groups = {TestSuite.EVT}, dataProvider = "smokeScenario")
     public void smoke(UserDefinition userDefinition) {
+        setRequirements("US0010");
         User user = UserProvider.getInstance().get(userDefinition);
         MyAccountViewExpected expected = MyAccountViewExpected.getInstance();
         MyAccountView actual = LandingView.directNav().inNavBarPrimaryMenu().clickLogin().login(user);
