@@ -1,36 +1,39 @@
+plugins {
+    id('java')
+    id('jacoco')
+}
+
 group 'com.softwareonpurpose'
 
-apply plugin: 'java'
-
 sourceCompatibility = 11
-version '1.3.0'
+project.version '1.3.0'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile 'com.google.code.gson:gson:2.8.+'
-    compile 'ch.qos.logback:logback-core:1.2.+'
-    compile 'ch.qos.logback:logback-classic:1.2.+'
-    compile 'org.slf4j:slf4j-api:1.7.+'
-    compile 'org.testng:testng:6.14.+'
-    compile 'org.seleniumhq.selenium:selenium-java:3.+'
-    compile 'org.jboss.resteasy:resteasy-jaxrs:3.7.+'
-    compile 'org.jboss.resteasy:resteasy-client:3.7+'
-    compile files('./src/main/resources/coverage4test-1.3.1.jar')
-    compile files('./src/main/resources/uinavigator-2.0.4.jar')
-    compile files('./src/main/resources/calibrator4test-1.5.0.jar')
-    compile files('./src/main/resources/indentmanager-1.0.6.jar')
+    implementation 'com.google.code.gson:gson:2.8.+'
+    implementation 'ch.qos.logback:logback-core:1.2.+'
+    implementation 'ch.qos.logback:logback-classic:1.2.+'
+    implementation 'org.slf4j:slf4j-api:1.7.+'
+    implementation 'org.testng:testng:6.14.+'
+    implementation 'org.seleniumhq.selenium:selenium-java:3.+'
+    implementation 'org.jboss.resteasy:resteasy-jaxrs:3.7.+'
+    implementation 'org.jboss.resteasy:resteasy-client:3.7+'
+    implementation files('./src/main/resources/coverage4test-1.3.1.jar')
+    implementation files('./src/main/resources/uinavigator-2.0.4.jar')
+    implementation files('./src/main/resources/calibrator4test-1.5.0.jar')
+    implementation files('./src/main/resources/indentmanager-1.0.6.jar')
 }
 
 wrapper() {
-    gradleVersion = '5.6.2'
+    gradleVersion = '6.3'
 }
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'softwaregauntlet', 'Implementation-Version': version
+        attributes 'Implementation-Title': 'softwaregauntlet', 'Implementation-Version': archiveVersion
     }
 }
 
