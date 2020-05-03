@@ -1,9 +1,8 @@
 package com.icescrum.view.landing;
 
-import com.softwareonpurpose.calibrator4test.Calibrator;
-import com.softwareonpurpose.uinavigator.UiRegion;
-import com.icescrum.view.landing.region.hubspotmessages.HubSpotMessageContainerCalibrator;
 import com.icescrum.view.landing.region.navbarmenu.NavBarPrimaryMenuCalibrator;
+import com.softwareonpurpose.calibrator4test.Calibrator;
+import com.softwareonpurpose.uinavigator.web.WebUiRegion;
 
 public class LandingViewCalibrator extends Calibrator {
     private static final String DESCRIPTION = "'Landing' view";
@@ -14,10 +13,9 @@ public class LandingViewCalibrator extends Calibrator {
         super(DESCRIPTION, expected, actual);
         this.expected = expected;
         this.actual = actual;
-        UiRegion.suppressConstructionLogging(true);
+        WebUiRegion.suppressConstructionLogging(true);
         addChildCalibrator(NavBarPrimaryMenuCalibrator.getInstance(expected.inNavBarPrimaryMenu(), actual.inNavBarPrimaryMenu()));
-        addChildCalibrator(HubSpotMessageContainerCalibrator.getInstance(expected.inHubSpotMessageContainer(), actual.inHubSpotMessageContainer()));
-        UiRegion.suppressConstructionLogging(false);
+        WebUiRegion.suppressConstructionLogging(false);
     }
 
     public static LandingViewCalibrator getInstance(LandingViewExpected expected, LandingView actual) {

@@ -1,18 +1,19 @@
 package com.icescrum.view.landing.region.hubspotmessages;
 
-import com.softwareonpurpose.uinavigator.UiElement;
-import com.softwareonpurpose.uinavigator.UiRegion;
+import com.softwareonpurpose.uinavigator.UiLocatorType;
+import com.softwareonpurpose.uinavigator.web.WebUiElement;
+import com.softwareonpurpose.uinavigator.web.WebUiRegion;
 
-public class HubSpotMessagesContainer extends UiRegion implements HubSpotMessagesContainerCalibratable {
+public class HubSpotMessagesContainer extends WebUiRegion implements HubSpotMessagesContainerCalibratable {
     private static final String DESCRIPTION = "'HubSpot Messages' region";
-    private static final String LOCATOR_TYPE = UiElement.LocatorType.ID;
-    private static final String LOCATOR_VALUE = "hubspot-messages-iframe-container";
+    private static final String LOCATOR_TYPE = UiLocatorType.TAG;
+    private static final String LOCATOR_VALUE = "iframe";
 
-    private HubSpotMessagesContainer(UiElement parent) {
-        super(UiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE, parent));
+    private HubSpotMessagesContainer(WebUiElement parent) {
+        super(WebUiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE, parent));
     }
 
-    public static HubSpotMessagesContainer getInstance(UiElement parent) {
+    public static HubSpotMessagesContainer getInstance(WebUiElement parent) {
         return new HubSpotMessagesContainer(parent);
     }
 
@@ -21,11 +22,7 @@ public class HubSpotMessagesContainer extends UiRegion implements HubSpotMessage
         return getInitialMessageBubbleElement().waitUntilVisible();
     }
 
-    private UiElement getInitialMessageBubbleElement() {
-        return UiElement.getInstance("'Initial Message' bubble", UiElement.LocatorType.TAG, "div", "aria-label", "Hey! Thanks for stopping by! Got any questions? We are happy to help :)", this.getElement());
-    }
-
-    private UiElement getWidgetLauncherButtonElement() {
-        return UiElement.getInstance("'Widget Launcher Button", UiElement.LocatorType.TAG, "button", "class", "widget-launcher", this.getElement());
+    private WebUiElement getInitialMessageBubbleElement() {
+        return WebUiElement.getInstance("'Initial Message' bubble", UiLocatorType.CLASS, "widget",  this.getElement());
     }
 }

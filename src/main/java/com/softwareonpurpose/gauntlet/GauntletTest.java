@@ -17,7 +17,7 @@ import com.softwareonpurpose.calibrator4test.Calibrator;
 import com.softwareonpurpose.coverage4test.CoverageReport;
 import com.softwareonpurpose.gauntlet.uidriver.ChromeDriverInstantiation;
 import com.softwareonpurpose.uinavigator.DriverInstantiation;
-import com.softwareonpurpose.uinavigator.UiHost;
+import com.softwareonpurpose.uinavigator.web.WebUiHost;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -50,7 +50,7 @@ public abstract class GauntletTest {
         if (driverInstantiation == null) {
             driverInstantiation = ChromeDriverInstantiation.getInstance();
         }
-        UiHost.setDriverInstantiation(driverInstantiation);
+        WebUiHost.setDriverInstantiation(driverInstantiation);
     }
 
     @BeforeMethod(alwaysRun = true)
@@ -60,7 +60,7 @@ public abstract class GauntletTest {
 
     @AfterMethod(alwaysRun = true)
     public void terminateExecution(ITestResult result) {
-        UiHost.quitInstance();
+        WebUiHost.quitInstance();
         addCoverageEntry(result);
     }
 
@@ -86,7 +86,7 @@ public abstract class GauntletTest {
         StringBuilder scenarioBuilder = new StringBuilder();
         for (Object participant : result.getParameters()) {
             String participantDescription = participant.toString();
-            String formattedDescription = participantDescription.substring(0, 1).equals("{") ? participantDescription
+            String formattedDescription = participantDescription.startsWith("{") ? participantDescription
                     : String.format("{%s}", participantDescription);
             scenarioBuilder.append(formattedDescription);
         }
@@ -96,7 +96,6 @@ public abstract class GauntletTest {
 
     @AfterClass(alwaysRun = true)
     public void writeCoverageReport() {
-        report.verificationCount(updatedVerificationCount);
         report.write();
     }
 

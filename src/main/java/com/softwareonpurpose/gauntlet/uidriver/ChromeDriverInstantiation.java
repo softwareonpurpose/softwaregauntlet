@@ -16,12 +16,12 @@ public class ChromeDriverInstantiation extends DriverInstantiation {
         return new ChromeDriverInstantiation();
     }
 
-    protected ChromeDriver instantiateDriver() {
+    public ChromeDriver instantiateDriver() {
         System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
         return new ChromeDriver();
     }
 
-    protected void configureDriver(WebDriver driver) {
+    public void configureDriver(WebDriver driver) {
         driver.manage().timeouts().implicitlyWait(getConfig().getTimeout(), TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }

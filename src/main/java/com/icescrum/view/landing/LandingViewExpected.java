@@ -1,6 +1,6 @@
 package com.icescrum.view.landing;
 
-import com.icescrum.view.landing.region.hubspotmessages.HubSpotMessagesContainerExpected;
+import com.icescrum.auth.module.core.widget.HubSpotChatWidgetExpected;
 import com.icescrum.view.landing.region.navbarmenu.NavBarPrimaryMenuExpected;
 
 public class LandingViewExpected implements LandingViewCalibratable {
@@ -19,7 +19,7 @@ public class LandingViewExpected implements LandingViewCalibratable {
     }
 
     @Override
-    public HubSpotMessagesContainerExpected inHubSpotMessageContainer() {
-        return HubSpotMessagesContainerExpected.getInstance();
+    public HubSpotChatWidgetExpected inHubSpotChatWidget() {
+        return HubSpotChatWidgetExpected.getInstance();
     }
 }

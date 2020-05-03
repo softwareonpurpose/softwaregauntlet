@@ -1,38 +1,38 @@
 package com.icescrum.view.landing;
 
-import com.icescrum.view.landing.region.hubspotmessages.HubSpotMessagesContainer;
+import com.icescrum.auth.module.core.widget.HubSpotChatWidget;
 import com.icescrum.view.landing.region.navbarmenu.NavBarPrimaryMenu;
 import com.softwareonpurpose.gauntlet.Environment;
-import com.softwareonpurpose.uinavigator.UiElement;
-import com.softwareonpurpose.uinavigator.UiHost;
-import com.softwareonpurpose.uinavigator.UiRegion;
-import com.softwareonpurpose.uinavigator.UiView;
+import com.softwareonpurpose.uinavigator.UiLocatorType;
+import com.softwareonpurpose.uinavigator.web.WebUiElement;
+import com.softwareonpurpose.uinavigator.web.WebUiHost;
+import com.softwareonpurpose.uinavigator.web.WebUiRegion;
+import com.softwareonpurpose.uinavigator.web.WebUiView;
 
-public class LandingView extends UiView implements LandingViewCalibratable {
+public class LandingView extends WebUiView implements LandingViewCalibratable {
     private static final String VIEW_URI = Environment.getInstance().getDomainUrl();
     private static final String DESCRIPTION = "'Landing' view";
-    private static final String LOCATOR_TYPE = UiElement.LocatorType.TAG;
+    private static final String LOCATOR_TYPE = UiLocatorType.TAG;
     private static final String LOCATOR_VALUE = "body";
 
     @SuppressWarnings("WeakerAccess")
     public LandingView() {
-        super(VIEW_URI, UiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE));
+        super(VIEW_URI, WebUiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE));
     }
 
     public static LandingView directNav() {
         new LandingView().load();
-        return UiView.expect(LandingView.class);
+        return WebUiView.expect(LandingView.class);
     }
 
     @Override
     protected boolean confirmElementStates() {
-        UiRegion.suppressConstructionLogging(true);
-        boolean confirmed = UiHost.getInstance().getUri().contains(VIEW_URI);
+        WebUiRegion.suppressConstructionLogging(true);
+        boolean confirmed = WebUiHost.getInstance().getUri().contains(VIEW_URI);
         confirmed &= this.getElement().waitUntilVisible();
         confirmed &= inNavBarPrimaryMenu().isVisible();
         confirmed &= inNavBarPrimaryMenu().isLoginDisplayed();
-        confirmed &= inHubSpotMessageContainer().isVisible();
-        UiRegion.suppressConstructionLogging(false);
+        WebUiRegion.suppressConstructionLogging(false);
         return confirmed;
     }
 
@@ -47,11 +47,11 @@ public class LandingView extends UiView implements LandingViewCalibratable {
     }
 
     @Override
-    public HubSpotMessagesContainer inHubSpotMessageContainer() {
-        return HubSpotMessagesContainer.getInstance(this.getElement());
+    public HubSpotChatWidget inHubSpotChatWidget() {
+        return HubSpotChatWidget.getInstance(this);
     }
 
-    private UiElement getTryForFreeButtonElement() {
-        return UiElement.getInstance("'Try for free' button", UiElement.LocatorType.CLASS, "try-free-button", this.getElement());
+    private WebUiElement getTryForFreeButtonElement() {
+        return WebUiElement.getInstance("'Try for free' button", UiLocatorType.CLASS, "try-free-button", this.getElement());
     }
 }
