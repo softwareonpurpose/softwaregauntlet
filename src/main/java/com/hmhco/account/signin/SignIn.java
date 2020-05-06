@@ -23,6 +23,17 @@ public class SignIn extends UiView implements SignInCalibratable {
 
     @Override
     protected boolean confirmElementStates() {
-        return getElement().isDisplayed();
+        boolean confirmed = getElement().isDisplayed();
+        confirmed &= getSignInButtonElement().isDisplayed();
+        return confirmed;
+    }
+
+    private UiElement getSignInButtonElement() {
+        String description = "'Sign In' button";
+        String locatorValue = "ui-btn-primary__btn";
+        String attribute = "title";
+        String value = "Sign In";
+        UiElement parent = this.getElement();
+        return UiElement.getInstance(description, UiElement.LocatorType.CLASS, locatorValue, attribute, value, parent);
     }
 }

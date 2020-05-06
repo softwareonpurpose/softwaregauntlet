@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class SignInTest extends GauntletTest {
     @Test(groups = {TestSuite.SMOKE, TestSuite.DEBUG})
     public void smoke() {
-        setRequirements("US-0001");
+        setRequirements("US-0001|US-0002");
         SignInExpected expected = SignInExpected.getInstance();
         SignIn actual = SignIn.directNav();
         then(SignInCalibrator.getInstance(expected, actual));
