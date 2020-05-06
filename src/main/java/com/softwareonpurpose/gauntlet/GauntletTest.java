@@ -40,7 +40,7 @@ public abstract class GauntletTest {
 
     protected GauntletTest() {
         String classname = this.getClass().getSimpleName();
-        report = CoverageReport.getInstance(classname.replace("Test", ""));
+        report = CoverageReport.getInstance(classname.replace("Tests", "").replace("Test", ""));
         initializeUiHost();
     }
 
@@ -166,6 +166,7 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class Application {
+        public static final String HMHCO = "hmhco";
 
         //  public final static String APPLICATION_NAME = "[application name]";
     }
@@ -175,6 +176,7 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class View {
+        public static final String SIGN_IN = "sign_in";
 
         //  public final static String VIEW_NAME = "[view name]";
     }
