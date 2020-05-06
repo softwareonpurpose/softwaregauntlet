@@ -153,7 +153,7 @@ public abstract class GauntletTest {
 
     @SuppressWarnings("unused")
     protected class TestSuite {
-        public static final String EVT = "evt";                 //  Environment Validation Test
+        public static final String SMOKE = "smoke";             //  Environment Validation Test
         public static final String DEBUG = "under_development"; //  Test being developed and/or debugged
         public static final String PRODUCTION = "production";   //  Benign (alters NO source data) executable in Production
         public static final String RELEASE = "release";         //  Test critical to validating Release Readiness

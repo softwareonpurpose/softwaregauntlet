@@ -65,7 +65,7 @@ task debug(type: Test) {
     }
 }
 
-task evt(type: Test) {
+task smoke(type: Test) {
     description = "Environment Validation"
     systemProperties['env'] = System.properties["env"]
     systemProperties['lang'] = System.properties["lang"]
@@ -75,25 +75,7 @@ task evt(type: Test) {
     def groupsToExclude = []
     groupsToExclude.add('unit')
     def groupsToInclude = []
-    groupsToInclude.add('evt')
-    useTestNG() {
-        groupsToInclude.each { String group -> includeGroups group }
-        groupsToExclude.each { String group -> excludeGroups group }
-    }
-}
-
-task bvt(type: Test) {
-    description = "EVT and DEBUG tests"
-    systemProperties['env'] = System.properties["env"]
-    systemProperties['lang'] = System.properties["lang"]
-    systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
-
-    def groupsToExclude = []
-    groupsToExclude.add('unit')
-    def groupsToInclude = []
-    groupsToInclude.add('evt')
-    groupsToInclude.add('under_development')
+    groupsToInclude.add('smoke')
     useTestNG() {
         groupsToInclude.each { String group -> includeGroups group }
         groupsToExclude.each { String group -> excludeGroups group }
