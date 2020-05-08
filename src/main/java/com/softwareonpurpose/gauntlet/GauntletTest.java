@@ -16,7 +16,6 @@ package com.softwareonpurpose.gauntlet;
 import com.softwareonpurpose.calibrator4test.Calibrator;
 import com.softwareonpurpose.coverage4test.CoverageReport;
 import com.softwareonpurpose.uinavigator.UiHost;
-import com.softwareonpurpose.uinavigator.driver.DefaultIeInstantiation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -32,6 +31,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class GauntletTest {
+
     private final CoverageReport report;
     private Logger logger;
     private String testMethodName;
@@ -46,13 +46,13 @@ public abstract class GauntletTest {
 
     private void initializeUiHost() {
         String browser = System.getProperty("host");
-        if (browser != null) {
-            switch (browser) {
-                case "ie":
-                    UiHost.setDriverInstantiation(DefaultIeInstantiation.getInstance());
-                default:
-            }
-        }
+//        if (browser != null) {
+//            switch (browser) {
+//                case "ie":
+        UiHost.setDriverInstantiation(DefaultChromeInstantiation.getInstance());
+//                default:
+//            }
+//        }
     }
 
     @BeforeMethod(alwaysRun = true)
@@ -153,6 +153,7 @@ public abstract class GauntletTest {
 
     @SuppressWarnings("unused")
     protected class TestSuite {
+
         public static final String SMOKE = "smoke";             //  Environment Validation Test
         public static final String DEBUG = "under_development"; //  Test being developed and/or debugged
         public static final String PRODUCTION = "production";   //  Benign (alters NO source data) executable in Production
@@ -166,6 +167,7 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class Application {
+
         public static final String HMHCO = "hmhco";
 
         //  public final static String APPLICATION_NAME = "[application name]";
@@ -176,6 +178,7 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class View {
+
         public static final String SIGN_IN = "sign_in";
 
         //  public final static String VIEW_NAME = "[view name]";
