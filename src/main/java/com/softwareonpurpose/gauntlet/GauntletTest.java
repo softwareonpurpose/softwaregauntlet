@@ -15,8 +15,8 @@ package com.softwareonpurpose.gauntlet;
 
 import com.softwareonpurpose.calibrator4test.Calibrator;
 import com.softwareonpurpose.coverage4test.CoverageReport;
-import com.softwareonpurpose.uinavigator.UiHost;
-import com.softwareonpurpose.uinavigator.driver.DefaultIeInstantiation;
+import com.softwareonpurpose.uinavigator.UiDriver;
+import com.softwareonpurpose.uinavigator.web.WebUiHost;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class GauntletTest {
+    private static UiDriver driverInstantiation;
     private final CoverageReport report;
     private Logger logger;
     private String testMethodName;
@@ -45,14 +46,10 @@ public abstract class GauntletTest {
     }
 
     private void initializeUiHost() {
-        String browser = System.getProperty("host");
-        if (browser != null) {
-            switch (browser) {
-                case "ie":
-                    UiHost.setDriverInstantiation(DefaultIeInstantiation.getInstance());
-                default:
-            }
+        if (driverInstantiation == null) {
+            driverInstantiation = ChromeUiDriver.getInstance();
         }
+        WebUiHost.setUiDriver(driverInstantiation);
     }
 
     @BeforeMethod(alwaysRun = true)
@@ -62,7 +59,7 @@ public abstract class GauntletTest {
 
     @AfterMethod(alwaysRun = true)
     public void terminateExecution(ITestResult result) {
-        UiHost.quitInstance();
+        WebUiHost.quitInstance();
         addCoverageEntry(result);
     }
 
@@ -87,8 +84,8 @@ public abstract class GauntletTest {
         }
         StringBuilder scenarioBuilder = new StringBuilder();
         for (Object participant : result.getParameters()) {
-            String participantDescription = participant.toString().replace("\\\"", "\"");
-            String formattedDescription = participantDescription.substring(0, 1).equals("{") ? participantDescription
+            String participantDescription = participant.toString();
+            String formattedDescription = participantDescription.startsWith("{") ? participantDescription
                     : String.format("{%s}", participantDescription);
             scenarioBuilder.append(formattedDescription);
         }
@@ -98,7 +95,6 @@ public abstract class GauntletTest {
 
     @AfterClass(alwaysRun = true)
     public void writeCoverageReport() {
-        report.verificationCount(updatedVerificationCount);
         report.write();
     }
 
@@ -142,7 +138,6 @@ public abstract class GauntletTest {
         return logger;
     }
 
-    @SuppressWarnings("WeakerAccess")
     protected void setRequirements(@SuppressWarnings("SameParameterValue") String requirements) {
         this.requirements = requirements;
     }
@@ -153,7 +148,7 @@ public abstract class GauntletTest {
 
     @SuppressWarnings("unused")
     protected class TestSuite {
-        public static final String EVT = "evt";                 //  Environment Validation Test
+        public static final String SMOKE = "smoke";             //  Smoke Suite
         public static final String DEBUG = "under_development"; //  Test being developed and/or debugged
         public static final String PRODUCTION = "production";   //  Benign (alters NO source data) executable in Production
         public static final String RELEASE = "release";         //  Test critical to validating Release Readiness
@@ -166,6 +161,7 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class Application {
+        public static final String ICE_SCRUM = "ice_scrum";
 
         //  public final static String APPLICATION_NAME = "[application name]";
     }
@@ -175,6 +171,9 @@ public abstract class GauntletTest {
      */
     @SuppressWarnings("unused")
     public class View {
+        public static final String LANDING = "landing";
+        public static final String LOGIN_USER_PASS = "login_user_pass";
+        public static final String MY_ACCOUNT = "my_account";
 
         //  public final static String VIEW_NAME = "[view name]";
     }
