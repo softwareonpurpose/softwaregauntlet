@@ -2,7 +2,7 @@ package com.icescrum.view.landing;
 
 import com.icescrum.view.landing.region.navbarmenu.NavBarPrimaryMenuCalibrator;
 import com.softwareonpurpose.calibrator4test.Calibrator;
-import com.softwareonpurpose.uinavigator.web.WebUiRegion;
+import com.softwareonpurpose.uinavigator.UiRegion;
 
 public class LandingViewCalibrator extends Calibrator {
     private static final String DESCRIPTION = "'Landing' view";
@@ -13,9 +13,9 @@ public class LandingViewCalibrator extends Calibrator {
         super(DESCRIPTION, expected, actual);
         this.expected = expected;
         this.actual = actual;
-        WebUiRegion.suppressConstructionLogging(true);
+        UiRegion.suppressConstructionLogging(true);
         addChildCalibrator(NavBarPrimaryMenuCalibrator.getInstance(expected.inNavBarPrimaryMenu(), actual.inNavBarPrimaryMenu()));
-        WebUiRegion.suppressConstructionLogging(false);
+        UiRegion.suppressConstructionLogging(false);
     }
 
     public static LandingViewCalibrator getInstance(LandingViewExpected expected, LandingView actual) {

@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 @Test(groups={GauntletTest.Application.ICE_SCRUM, GauntletTest.View.LOGIN_USER_PASS})
 public class LoginUserPassViewTests extends GauntletTest{
-    @Test(groups={TestSuite.EVT})
+    @Test(groups={TestSuite.SMOKE})
     public void smoke(){
         LoginUserPassViewExpected expected = LoginUserPassViewExpected.getInstance();
         LoginUserPassView actual = LandingView.directNav().inNavBarPrimaryMenu().clickLogin();

@@ -15,8 +15,8 @@ package com.softwareonpurpose.gauntlet;
 
 import com.softwareonpurpose.calibrator4test.Calibrator;
 import com.softwareonpurpose.coverage4test.CoverageReport;
-import com.softwareonpurpose.gauntlet.uidriver.ChromeDriverInstantiation;
-import com.softwareonpurpose.uinavigator.DriverInstantiation;
+import com.softwareonpurpose.uinavigator.UiDriver;
+import com.softwareonpurpose.uinavigator.web.ChromeDriver;
 import com.softwareonpurpose.uinavigator.web.WebUiHost;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class GauntletTest {
-    private static DriverInstantiation driverInstantiation;
+    private static UiDriver driverInstantiation;
     private final CoverageReport report;
     private Logger logger;
     private String testMethodName;
@@ -48,9 +48,9 @@ public abstract class GauntletTest {
 
     private void initializeUiHost() {
         if (driverInstantiation == null) {
-            driverInstantiation = ChromeDriverInstantiation.getInstance();
+            driverInstantiation = ChromeDriver.getInstance();
         }
-        WebUiHost.setDriverInstantiation(driverInstantiation);
+        WebUiHost.setUiDriver(driverInstantiation);
     }
 
     @BeforeMethod(alwaysRun = true)
@@ -149,7 +149,7 @@ public abstract class GauntletTest {
 
     @SuppressWarnings("unused")
     protected class TestSuite {
-        public static final String EVT = "evt";                 //  Environment Validation Test
+        public static final String SMOKE = "smoke";             //  Smoke Suite
         public static final String DEBUG = "under_development"; //  Test being developed and/or debugged
         public static final String PRODUCTION = "production";   //  Benign (alters NO source data) executable in Production
         public static final String RELEASE = "release";         //  Test critical to validating Release Readiness

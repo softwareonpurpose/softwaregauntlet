@@ -1,21 +1,21 @@
 package com.icescrum.view.landing.region.navbarmenu;
 
 import com.icescrum.auth.module.core.view.loginuserpass.LoginUserPassView;
+import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiLocatorType;
+import com.softwareonpurpose.uinavigator.UiRegion;
 import com.softwareonpurpose.uinavigator.UiView;
-import com.softwareonpurpose.uinavigator.web.WebUiElement;
-import com.softwareonpurpose.uinavigator.web.WebUiRegion;
 
-public class NavBarPrimaryMenu extends WebUiRegion implements NavBarPrimaryMenuCalibratable {
+public class NavBarPrimaryMenu extends UiRegion implements NavBarPrimaryMenuCalibratable {
     private static final String DESCRIPTION = "'Nav Bar Primary Menu' region";
     private static final String LOCATOR_TYPE = UiLocatorType.ID;
     private static final String LOCATOR_VALUE = "navbar-primary-menu";
 
-    private NavBarPrimaryMenu(WebUiElement parent) {
-        super(WebUiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE, parent));
+    private NavBarPrimaryMenu(UiElement parent) {
+        super(UiElement.getInstance(DESCRIPTION, LOCATOR_TYPE, LOCATOR_VALUE, parent));
     }
 
-    public static NavBarPrimaryMenu getInstance(WebUiElement parent) {
+    public static NavBarPrimaryMenu getInstance(UiElement parent) {
         return new NavBarPrimaryMenu(parent);
     }
 
@@ -26,11 +26,11 @@ public class NavBarPrimaryMenu extends WebUiRegion implements NavBarPrimaryMenuC
 
     @Override
     public Boolean isLanguageSwitcherExpanded() {
-        return "true".equals(WebUiElement.getInstance("'Language' switcher", UiLocatorType.CLASS, "language-switcher", this.getElement()).getAttribute("aria-expanded"));
+        return "true".equals(UiElement.getInstance("'Language' switcher", UiLocatorType.CLASS, "language-switcher", this.getElement()).getAttribute("aria-expanded"));
     }
 
-    private WebUiElement getLoginButtonElement() {
-        return WebUiElement.getInstance("'Login' button", UiLocatorType.TAG, "a", "href", "https://www.icescrum.com/my-account/", this.getElement());
+    private UiElement getLoginButtonElement() {
+        return UiElement.getInstance("'Login' button", UiLocatorType.TAG, "a", "href", "https://www.icescrum.com/my-account/", this.getElement());
     }
 
     public LoginUserPassView clickLogin() {

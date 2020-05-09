@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 @Test(groups = {GauntletTest.Application.ICE_SCRUM, GauntletTest.View.LANDING})
 public class LandingViewTests extends GauntletTest {
-    @Test(groups = {TestSuite.EVT, TestSuite.DEBUG})
+    @Test(groups = {TestSuite.SMOKE, TestSuite.DEBUG})
     public void smoke() {
         setRequirements("US0001|US0002|US0003|US0004");
         LandingViewExpected expected = LandingViewExpected.getInstance();
@@ -15,7 +15,7 @@ public class LandingViewTests extends GauntletTest {
         then(LandingViewCalibrator.getInstance(expected, actual));
     }
 
-    @Test(groups = {TestSuite.RELEASE}, dependsOnGroups = {TestSuite.EVT})
+    @Test(groups = {TestSuite.RELEASE}, dependsOnGroups = {TestSuite.SMOKE})
     public void logout() {
         LandingViewExpected expected = LandingViewExpected.getInstance();
         User user = UserProvider.getInstance().get();

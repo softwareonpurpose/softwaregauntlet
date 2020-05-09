@@ -17,7 +17,7 @@ public class MyAccountViewTests extends GauntletTest {
         };
     }
 
-    @Test(groups = {TestSuite.EVT}, dataProvider = "smokeScenario")
+    @Test(groups = {TestSuite.SMOKE}, dataProvider = "smokeScenario")
     public void smoke(UserDefinition userDefinition) {
         setRequirements("US0010");
         User user = UserProvider.getInstance().get(userDefinition);
