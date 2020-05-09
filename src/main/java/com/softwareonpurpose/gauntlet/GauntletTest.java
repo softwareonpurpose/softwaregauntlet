@@ -16,7 +16,7 @@ package com.softwareonpurpose.gauntlet;
 import com.softwareonpurpose.calibrator4test.Calibrator;
 import com.softwareonpurpose.coverage4test.CoverageReport;
 import com.softwareonpurpose.uinavigator.UiDriver;
-import com.softwareonpurpose.uinavigator.web.ChromeDriver;
+import com.softwareonpurpose.uinavigator.web.ChromeUiDriver;
 import com.softwareonpurpose.uinavigator.web.WebUiHost;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,7 @@ public abstract class GauntletTest {
 
     private void initializeUiHost() {
         if (driverInstantiation == null) {
-            driverInstantiation = ChromeDriver.getInstance();
+            driverInstantiation = ChromeUiDriver.getInstance();
         }
         WebUiHost.setUiDriver(driverInstantiation);
     }
