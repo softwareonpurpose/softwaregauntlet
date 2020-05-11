@@ -17,7 +17,9 @@ package com.softwareonpurpose.gauntlet;
 
 import com.softwareonpurpose.uinavigator.UiDriver;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -30,11 +32,17 @@ public class ChromeUiDriver extends UiDriver {
     }
 
     @Override
-    public org.openqa.selenium.chrome.ChromeDriver instantiateDriver() {
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
+    public ChromeDriver instantiateDriver() {
+        String operatingSystem = System.getProperty("os.name");
+        LoggerFactory.getLogger(this.getClass()).info(String.format("Executing test on %s", operatingSystem));
+        if (operatingSystem.toLowerCase().contains("windows")) {
+            System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
+        } else {
+            System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver_linux64-81.0.4044.138");
+        }
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors");
-        return new org.openqa.selenium.chrome.ChromeDriver(options);
+        return new ChromeDriver(options);
     }
 
     @Override
