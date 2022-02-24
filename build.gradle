@@ -1,163 +1,45 @@
-group 'com.softwareonpurpose'
-
-apply plugin: 'java'
-
-sourceCompatibility = 11
-project.version '1.3.2'
-
+plugins {
+    id 'java'
+}
+group 'org.softwareonpurpose'
+version '0.0.1-SNAPSHOT'
 repositories {
     mavenCentral()
 }
-
 dependencies {
-    implementation 'com.google.code.gson:gson:2.8.+'
-    implementation 'ch.qos.logback:logback-core:1.2.+'
-    implementation 'ch.qos.logback:logback-classic:1.2.+'
-    implementation 'org.slf4j:slf4j-api:1.7.+'
-    implementation 'org.testng:testng:6.14.+'
-    implementation 'org.seleniumhq.selenium:selenium-java:3.+'
-    implementation 'org.jboss.resteasy:resteasy-jaxrs:3.7.+'
-    implementation 'org.jboss.resteasy:resteasy-client:3.7+'
+    testImplementation 'org.testng:testng:7.5+'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.1.2'
     implementation files('./src/main/resources/coverage4test-3.0.0.jar')
     implementation files('./src/main/resources/uinavigator-3.0.3.jar')
-    implementation files('./src/main/resources/calibrator4test-1.5.1.jar')
-    implementation files('./src/main/resources/indentmanager-1.0.7.jar')
 }
-
-wrapper() {
-    gradleVersion = '6.3'
+wrapper {
+    version '7.3'
 }
-
-jar {
-    manifest {
-        attributes 'Implementation-Title': 'softwaregauntlet', 'Implementation-Version': archiveVersion
-    }
-}
-
 test {
-    description = "All tests"
-    systemProperties['env'] = System.properties["env"]
-    systemProperties['lang'] = System.properties["lang"]
-    systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
-
-    def groupsToExclude = []
-    groupsToExclude.add('unit')
-    useTestNG() {
-        groupsToExclude.each { String group -> excludeGroups group }
-    }
+    useTestNG()
 }
-
-task debug(type: Test) {
-    description = 'Tests under development or being debugged'
-    systemProperties['env'] = System.properties["env"]
-    systemProperties['lang'] = System.properties["lang"]
-    systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
-
-    def groupsToExclude = []
-    groupsToExclude.add('unit')
-    def groupsToInclude = []
-    groupsToInclude.add('under_development')
-    useTestNG() {
-        groupsToInclude.each { String group -> includeGroups group }
-        groupsToExclude.each { String group -> excludeGroups group }
-    }
+//Suites
+task regression(type: Test) {
+    useTestNG();
 }
-
-task evt(type: Test) {
-    description = "Environment Validation"
-    systemProperties['env'] = System.properties["env"]
-    systemProperties['lang'] = System.properties["lang"]
-    systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
-
-    def groupsToExclude = []
-    groupsToExclude.add('unit')
-    def groupsToInclude = []
-    groupsToInclude.add('evt')
-    useTestNG() {
-        groupsToInclude.each { String group -> includeGroups group }
-        groupsToExclude.each { String group -> excludeGroups group }
-    }
+task smoke(type: Test) {
+    useTestNG { includeGroups 'smoke' }
 }
-
-task bvt(type: Test) {
-    description = "EVT and DEBUG tests"
-    systemProperties['env'] = System.properties["env"]
-    systemProperties['lang'] = System.properties["lang"]
-    systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
-
-    def groupsToExclude = []
-    groupsToExclude.add('unit')
-    def groupsToInclude = []
-    groupsToInclude.add('evt')
-    groupsToInclude.add('under_development')
-    useTestNG() {
-        groupsToInclude.each { String group -> includeGroups group }
-        groupsToExclude.each { String group -> excludeGroups group }
-    }
+task acceptance(type: Test) {
+    useTestNG { includeGroups 'acceptance' }
 }
-
-task sprint(type: Test) {
-    description = "Sprint validation"
-    systemProperties['env'] = System.properties["env"]
-    systemProperties['lang'] = System.properties["lang"]
-    systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
-
-    def groupsToExclude = []
-    groupsToExclude.add('unit')
-    def groupsToInclude = []
-    groupsToInclude.add('sprint')
-    useTestNG() {
-        groupsToInclude.each { String group -> includeGroups group }
-        groupsToExclude.each { String group -> excludeGroups group }
-    }
-}
-
 task release(type: Test) {
-    description = "Release validation"
-    systemProperties['env'] = System.properties["env"]
-    systemProperties['lang'] = System.properties["lang"]
-    systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
-
-    def groupsToExclude = []
-    groupsToExclude.add('unit')
-    def groupsToInclude = []
-    groupsToInclude.add('release')
-    useTestNG() {
-        groupsToInclude.each { String group -> includeGroups group }
-        groupsToExclude.each { String group -> excludeGroups group }
-    }
+    useTestNG { includeGroups 'release' }
+}
+task debug(type: Test) {
+    useTestNG { includeGroups 'debug' }
+}
+task deployment(type: Test) {
+    useTestNG { includeGroups 'acceptance', 'release' }
 }
 
-task production(type: Test) {
-    description = "Production validation (non-destructive)"
-    systemProperties['env'] = System.properties["env"]
-    systemProperties['lang'] = System.properties["lang"]
-    systemProperties['host'] = System.properties["host"]
-    maxParallelForks = 4
-
-    def groupsToExclude = []
-    groupsToExclude.add('unit')
-    def groupsToInclude = []
-    groupsToInclude.add('production')
-    useTestNG() {
-        groupsToInclude.each { String group -> includeGroups group }
-        groupsToExclude.each { String group -> excludeGroups group }
-    }
-}
-
-task unit(type: Test) {
-    description = "Unit tests"
-    maxParallelForks = 4
-
-    def groupsToInclude = []
-    groupsToInclude.add('unit')
-    useTestNG() {
-        groupsToInclude.each { String group -> includeGroups group }
-    }
+tasks.withType(Test) {
+    maxParallelForks = (Runtime.runtime.availableProcessors() - 2)
 }

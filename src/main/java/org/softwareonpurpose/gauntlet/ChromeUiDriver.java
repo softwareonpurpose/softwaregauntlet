@@ -1,4 +1,4 @@
-package com.softwareonpurpose.gauntlet;
+package org.softwareonpurpose.gauntlet;
 /*
   Copyright 2020 Craig A. Stockton
   <p/>
