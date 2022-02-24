@@ -23,6 +23,7 @@ import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
@@ -36,12 +37,12 @@ public abstract class GauntletTest {
     private final CoverageReport report;
     private Logger logger;
     private String testMethodName;
+    private String featureName;
     private String requirements;
     private long updatedVerificationCount;
 
     protected GauntletTest() {
-        String classname = this.getClass().getSimpleName();
-        report = CoverageReport.getInstance(classname.replace("Test", ""));
+        report = CoverageReport.getInstance();
         initializeUiHost();
     }
 
@@ -50,6 +51,11 @@ public abstract class GauntletTest {
             driverInstantiation = ChromeUiDriver.getInstance();
         }
         WebUiHost.setUiDriver(driverInstantiation);
+    }
+
+    @BeforeClass(alwaysRun = true)
+    public void Initialize(){
+        featureName = this.getClass().getSimpleName().replace("Tests","");
     }
 
     @BeforeMethod(alwaysRun = true)
@@ -70,10 +76,10 @@ public abstract class GauntletTest {
         } else {
             requirementList = Arrays.stream(requirements.split("\\|")).collect(Collectors.toList());
         }
-        String scenario = compileScenario(result);
+        Object scenario = compileScenario(result);
         for (String requirement : requirementList) {
             requirement = requirement != null ? requirement.replace(".", "|") : null;
-            report.addEntry(testMethodName, scenario, requirement);
+            report.addTestEntry(testMethodName, featureName, null, scenario, requirement);
         }
         setRequirements(null);
     }
@@ -95,7 +101,8 @@ public abstract class GauntletTest {
 
     @AfterClass(alwaysRun = true)
     public void writeCoverageReport() {
-        report.write();
+        System.out.println(report.getRequirementsCoverage());
+        System.out.printf(report.getSystemCoverage());
     }
 
     @SuppressWarnings("unused")
