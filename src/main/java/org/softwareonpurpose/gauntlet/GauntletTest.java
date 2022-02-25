@@ -4,7 +4,6 @@ import org.apache.commons.io.FileUtils;
 import org.softwareonpurpose.coverage4test.CoverageReport;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
