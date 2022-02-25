@@ -33,7 +33,7 @@ public class ChromeUiDriver extends UiDriver {
     public org.openqa.selenium.chrome.ChromeDriver instantiateDriver() {
         System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors");
+//        options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors");
         return new org.openqa.selenium.chrome.ChromeDriver(options);
     }
 
