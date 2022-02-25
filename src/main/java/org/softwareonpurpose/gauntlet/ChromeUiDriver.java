@@ -19,7 +19,7 @@ import com.softwareonpurpose.uinavigator.UiDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 public class ChromeUiDriver extends UiDriver {
 
@@ -39,7 +39,7 @@ public class ChromeUiDriver extends UiDriver {
 
     @Override
     public void configureDriver(WebDriver driver) {
-        driver.manage().timeouts().implicitlyWait(getConfig().getTimeout(), TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(getConfig().getTimeout()));
     }
 
     @Override
