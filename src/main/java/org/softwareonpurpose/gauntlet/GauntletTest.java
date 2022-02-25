@@ -1,5 +1,7 @@
 package org.softwareonpurpose.gauntlet;
 
+import com.softwareonpurpose.uinavigator.UiHost;
+import com.softwareonpurpose.uinavigator.web.WebUiHost;
 import org.apache.commons.io.FileUtils;
 import org.softwareonpurpose.coverage4test.CoverageReport;
 import org.testng.ITestResult;
@@ -11,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 
 @Test
 public abstract class GauntletTest {
+    private final UiHost host = WebUiHost.getInstance(ChromeUiDriver.getInstance());
     private static final CoverageReport reportManager = CoverageReport.getInstance();
     private String feature;
     private String method;
