@@ -1,4 +1,4 @@
-package com.softwareonpurpose.gauntlet;
+package org.softwareonpurpose.gauntlet;
 /*
   Copyright 2020 Craig A. Stockton
   <p/>
@@ -19,7 +19,7 @@ import com.softwareonpurpose.uinavigator.UiDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 public class ChromeUiDriver extends UiDriver {
 
@@ -33,13 +33,13 @@ public class ChromeUiDriver extends UiDriver {
     public org.openqa.selenium.chrome.ChromeDriver instantiateDriver() {
         System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors");
+//        options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors");
         return new org.openqa.selenium.chrome.ChromeDriver(options);
     }
 
     @Override
     public void configureDriver(WebDriver driver) {
-        driver.manage().timeouts().implicitlyWait(getConfig().getTimeout(), TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(getConfig().getTimeout()));
     }
 
     @Override
