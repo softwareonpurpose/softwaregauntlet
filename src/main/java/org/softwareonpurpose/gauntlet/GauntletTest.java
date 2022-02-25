@@ -1,22 +1,26 @@
 package org.softwareonpurpose.gauntlet;
 
-import com.softwareonpurpose.uinavigator.UiHost;
 import com.softwareonpurpose.uinavigator.web.WebUiHost;
 import org.apache.commons.io.FileUtils;
 import org.softwareonpurpose.coverage4test.CoverageReport;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 @Test
 public abstract class GauntletTest {
-    private final UiHost host = WebUiHost.getInstance(ChromeUiDriver.getInstance());
     private static final CoverageReport reportManager = CoverageReport.getInstance();
     private String feature;
     private String method;
+
+    protected GauntletTest() {
+        WebUiHost.getInstance(ChromeUiDriver.getInstance());
+    }
 
     @BeforeClass(alwaysRun = true)
     protected void initialize() {
@@ -29,11 +33,12 @@ public abstract class GauntletTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    protected void reportMethod(ITestResult result) {
+    protected void terminateTest(ITestResult result) {
         System.out.println(result.getMethod());
         System.out.println(result.getName());
-        System.out.println(result.getParameters());
+        System.out.println(Arrays.toString(result.getParameters()));
         System.out.println(result.getTestClass());
+        WebUiHost.quitInstance();
     }
 
     @AfterClass(alwaysRun = true)
