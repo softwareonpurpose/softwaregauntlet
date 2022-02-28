@@ -1,8 +1,10 @@
 package org.softwareonpurpose.gauntlet;
 
+import com.softwareonpurpose.calibrator4test.Calibrator;
 import com.softwareonpurpose.uinavigator.web.WebUiHost;
 import org.apache.commons.io.FileUtils;
 import org.softwareonpurpose.coverage4test.CoverageReport;
+import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
@@ -59,5 +61,9 @@ public abstract class GauntletTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    protected void then(Calibrator calibrator) {
+        Assert.assertEquals(calibrator.calibrate(), Calibrator.SUCCESS);
     }
 }
