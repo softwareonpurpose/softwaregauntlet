@@ -11,6 +11,9 @@ dependencies {
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.1.2'
+    implementation 'ch.qos.logback:logback-core:1.2.10'
+    implementation 'ch.qos.logback:logback-classic:1.2.10'
+    implementation 'org.slf4j:slf4j-api:1.7.36'
     implementation files('./src/main/resources/coverage4test-3.0.0.jar')
     implementation files('./src/main/resources/uinavigator-3.0.3.jar')
     implementation files('./src/main/resources/calibrator4test-1.5.1.jar')
