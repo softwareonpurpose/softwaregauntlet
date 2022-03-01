@@ -1,5 +1,7 @@
 package com.aaa.view.insurance.quotes.shortform;
 
+import com.aaa.view.insurance.quotes.data.request.InsuranceRequest;
+import com.aaa.view.insurance.quotes.shortform.contact.ContactView;
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiLocatorType;
 import com.softwareonpurpose.uinavigator.UiView;
@@ -17,5 +19,51 @@ public class ShortFormView extends UiView implements ShortFormViewCalibratable {
     @Override
     protected boolean confirmElementStates() {
         return this.getElement().waitUntilVisible();
+    }
+
+    public ShortFormView setCurrentlyInsured(boolean isInsured) {
+        if (isInsured) {
+            getCurrentlyInsuredYesElement().click();
+        } else {
+            getCurrentlyInsuredNoElement().click();
+        }
+        return UiView.expect(ShortFormView.class);
+    }
+
+    private UiElement getCurrentlyInsuredNoElement() {
+        String description = "'Currently Ensured - no' radio";
+        String classValue = "Radio";
+        String attribute = "data-quid";
+        String attributeValue = "RadioItem-no";
+        return UiElement.getInstance(description, UiLocatorType.CLASS, classValue, attribute, attributeValue, this.getElement());
+    }
+
+    private UiElement getCurrentlyInsuredYesElement() {
+        String description = "'Currently Ensured - yes' radio";
+        String classValue = "Radio";
+        String attribute = "data-quid";
+        String attributeValue = "RadioItem-yes";
+        return UiElement.getInstance(description, UiLocatorType.CLASS, classValue, attribute, attributeValue, this.getElement());
+    }
+
+    public ShortFormView setInsuranceType(String insuranceType) {
+        UiElement.getInstance("'Universal Life' checkbox", UiLocatorType.ID, "12", this.getElement()).click();
+        return UiView.expect(ShortFormView.class);
+    }
+
+    public ContactView clickNext() {
+        getNextButtonElement().click();
+        return UiView.expect(ContactView.class);
+    }
+
+    private UiElement getNextButtonElement() {
+        return UiElement.getInstance("'Next' button", UiLocatorType.CLASS, "Button", "data-quid", "continue", this.getElement());
+    }
+
+    public ContactView submit(InsuranceRequest insuranceRequest) {
+        setInsuranceType(insuranceRequest.getType());
+        setCurrentlyInsured(insuranceRequest.isCurrentlyInsured());
+        clickNext();
+        return UiView.expect(ContactView.class);
     }
 }
