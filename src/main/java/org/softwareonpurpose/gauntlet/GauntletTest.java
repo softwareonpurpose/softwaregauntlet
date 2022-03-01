@@ -66,4 +66,17 @@ public abstract class GauntletTest {
     protected void then(Calibrator calibrator) {
         Assert.assertEquals(calibrator.calibrate(), Calibrator.SUCCESS);
     }
+
+    public class Application {
+        public static final String INSURANCE_APPLICATION = "insurance_application";
+    }
+
+    public class View {
+        public static final String ZIP_ROUTER = "zip_router";
+    }
+
+    public class TestSuite {
+        public static final String SMOKE = "smoke";
+        public static final String ACCEPTANCE = "acceptance";
+    }
 }
