@@ -27,9 +27,17 @@ test {
 }
 //Suites
 task regression(type: Test) {
+    description = "All tests"
+    systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
+    systemProperties['host'] = System.properties["host"]
     useTestNG();
 }
 task smoke(type: Test) {
+    description = "Smoke tests"
+    systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
+    systemProperties['host'] = System.properties["host"]
     useTestNG { includeGroups 'smoke' }
 }
 task acceptance(type: Test) {
