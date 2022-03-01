@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 @Test
 public abstract class GauntletTest {
@@ -36,10 +35,10 @@ public abstract class GauntletTest {
 
     @AfterMethod(alwaysRun = true)
     protected void terminateTest(ITestResult result) {
-        System.out.println(result.getMethod());
-        System.out.println(result.getName());
-        System.out.println(Arrays.toString(result.getParameters()));
-        System.out.println(result.getTestClass());
+//        System.out.println(result.getMethod());
+//        System.out.println(result.getName());
+//        System.out.println(Arrays.toString(result.getParameters()));
+//        System.out.println(result.getTestClass());
         WebUiHost.quitInstance();
     }
 

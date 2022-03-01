@@ -29,10 +29,10 @@ public class ZipRouterViewTests extends GauntletTest {
         then(ZipRouterViewCalibrator.getInstance(expected, actual));
     }
 
-    @Test(groups = {TestSuite.ACCEPTANCE}, dataProvider = "scenarios", dependsOnMethods = "smoke")
-    public void enterZipCode(String zipCode) {
-        ZipRouterViewExpected expected = ZipRouterViewExpected.getInstance(zipCode);
-        ZipRouterView actual = ZipRouterView.directNav().enterZip(zipCode);
-        then(ZipRouterViewCalibrator.getInstance(expected, actual));
-    }
+//    @Test(groups = {TestSuite.ACCEPTANCE}, dataProvider = "scenarios", dependsOnMethods = "smoke")
+//    public void enterZipCode(String zipCode) {
+//        ZipRouterViewExpected expected = ZipRouterViewExpected.getInstance(zipCode);
+//        ZipRouterView actual = ZipRouterView.directNav().enterZip(zipCode);
+//        then(ZipRouterViewCalibrator.getInstance(expected, actual));
+//    }
 }
