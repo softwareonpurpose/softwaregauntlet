@@ -1,4 +1,4 @@
-package org.aaa.view.insurance.quotes.shortform;
+package com.aaa.view.insurance.quotes.shortform.ziprouter;
 
 import com.softwareonpurpose.calibrator4test.Calibrator;
 

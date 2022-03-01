@@ -1,5 +1,6 @@
-package org.aaa.view.insurance.quotes.shortform;
+package com.aaa.view.insurance.quotes.shortform.ziprouter;
 
+import com.aaa.view.insurance.quotes.shortform.ShortFormView;
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiLocatorType;
 import com.softwareonpurpose.uinavigator.UiView;
@@ -31,5 +32,20 @@ public class ZipRouterView extends UiView implements ZipRouterViewCalibratable {
 
     private UiElement getGoButtonElement() {
         return UiElement.getInstance("'Go' button", UiLocatorType.ID, "goButton", this.getElement());
+    }
+
+    public ZipRouterView enterZip(String zipCode) {
+        getZipCodeElement().set(zipCode);
+        return UiView.expect(ZipRouterView.class);
+    }
+
+    private UiElement getZipCodeElement() {
+        return UiElement.getInstance("'Zip Code' textbox", UiLocatorType.NAME, "zipCode", this.getElement());
+    }
+
+    public ShortFormView submit(String zipCode) {
+        enterZip(zipCode);
+        getGoButtonElement().click();
+        return UiView.expect(ShortFormView.class);
     }
 }

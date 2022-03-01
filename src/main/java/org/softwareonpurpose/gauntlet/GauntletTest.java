@@ -73,6 +73,7 @@ public abstract class GauntletTest {
 
     public class View {
         public static final String ZIP_ROUTER = "zip_router";
+        public static final String SHORT_FORM = "short_form";
     }
 
     public class TestSuite {
