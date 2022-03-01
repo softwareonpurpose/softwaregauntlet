@@ -5,10 +5,11 @@ import com.aaa.view.insurance.quotes.shortform.contact.ContactView;
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiLocatorType;
 import com.softwareonpurpose.uinavigator.UiView;
+import org.softwareonpurpose.gauntlet.Environment;
 
 public class ShortFormView extends UiView implements ShortFormViewCalibratable {
     private static final String DESCRIPTION = "'Short Form' view";
-    private static final String VIEW_URI = "https://appuat1.ace.aaa.com/insurance/quotes/shortform";
+    private static final String VIEW_URI = Environment.getInstance().getDomainUrl();
     private static final String LOCATOR_TYPE = UiLocatorType.ID;
     private static final String LOCATOR_VALUE = "insurance-products-form";
 

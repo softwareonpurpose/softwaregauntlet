@@ -4,9 +4,10 @@ import com.aaa.view.insurance.quotes.shortform.ShortFormView;
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiLocatorType;
 import com.softwareonpurpose.uinavigator.UiView;
+import org.softwareonpurpose.gauntlet.Environment;
 
 public class ZipRouterView extends UiView implements ZipRouterViewCalibratable {
-    private static final String VIEW_URI = "https://appuat1.ace.aaa.com/insurance/quotes/shortform";
+    private static final String VIEW_URI = Environment.getInstance().getDomainUrl();
     private static final String DESCRIPTION = "'Zip Router' view";
     private static final String LOCATOR_TYPE = UiLocatorType.CLASS;
     private static final String LOCATOR_VALUE = "zip-modal-open";
@@ -42,5 +43,10 @@ public class ZipRouterView extends UiView implements ZipRouterViewCalibratable {
         getZipCodeElement().set(zipCode);
         getGoButtonElement().click();
         return UiView.expect(ShortFormView.class);
+    }
+
+    public ZipRouterView enterZip(String zipCode) {
+        getZipCodeElement().set(zipCode);
+        return UiView.expect(ZipRouterView.class);
     }
 }

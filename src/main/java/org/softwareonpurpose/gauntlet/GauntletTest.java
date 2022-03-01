@@ -1,6 +1,7 @@
 package org.softwareonpurpose.gauntlet;
 
 import com.softwareonpurpose.calibrator4test.Calibrator;
+import com.softwareonpurpose.uinavigator.UiDriver;
 import com.softwareonpurpose.uinavigator.web.WebUiHost;
 import org.apache.commons.io.FileUtils;
 import org.softwareonpurpose.coverage4test.CoverageReport;
@@ -20,7 +21,10 @@ public abstract class GauntletTest {
     private String method;
 
     protected GauntletTest() {
-        WebUiHost.getInstance(ChromeUiDriver.getInstance());
+        UiDriver uiDriver = System.getProperty("host").equals("saucelabs")
+                ? SauceLabsUiDriver.getInstance()
+                : ChromeUiDriver.getInstance();
+        WebUiHost.getInstance(uiDriver);
     }
 
     @BeforeClass(alwaysRun = true)

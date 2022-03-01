@@ -58,4 +58,8 @@ public class Environment {
     String getProperty(String key) {
         return properties.getProperty(key);
     }
+
+    public String getDomainUrl() {
+        return "https://appuat1.ace.aaa.com/insurance/quotes/shortform";
+    }
 }
