@@ -18,4 +18,8 @@ public class ZipRouterViewTests extends GauntletTest {
         ZipRouterView actual = ZipRouterView.directNav();
         then(ZipRouterViewCalibrator.getInstance(expected, actual));
     }
+
+    @Test(groups = {TestSuite.ACCEPTANCE}, dependsOnMethods = "smoke")
+    public void zipCodeTextField
+
 }
