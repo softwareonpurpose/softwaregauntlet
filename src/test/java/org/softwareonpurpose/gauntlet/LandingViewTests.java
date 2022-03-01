@@ -1,6 +1,5 @@
-package org.aaa.view.landing;
+package org.softwareonpurpose.gauntlet;
 
-import org.softwareonpurpose.gauntlet.GauntletTest;
 import org.testng.annotations.Test;
 
 @Test
