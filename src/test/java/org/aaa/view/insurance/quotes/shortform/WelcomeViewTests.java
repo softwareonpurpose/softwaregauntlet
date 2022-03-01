@@ -1,4 +1,4 @@
 package org.aaa.view.insurance.quotes.shortform;
 
-public interface ShortFormViewCalibratable {
+public class WelcomeViewTests {
 }
