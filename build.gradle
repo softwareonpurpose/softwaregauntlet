@@ -23,6 +23,10 @@ wrapper {
     version '7.3'
 }
 test {
+    description = "All tests"
+    systemProperties['env'] = System.properties["env"]
+    systemProperties['lang'] = System.properties["lang"]
+    systemProperties['host'] = System.properties["host"]
     useTestNG()
 }
 //Suites
