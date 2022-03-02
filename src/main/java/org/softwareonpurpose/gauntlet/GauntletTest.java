@@ -13,17 +13,28 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Test
 public abstract class GauntletTest {
     private static final CoverageReport reportManager = CoverageReport.getInstance();
     private String feature;
     private String method;
+    private String testName;
+    private List<String> requirements = new ArrayList<>();
 
     protected GauntletTest() {
-        UiDriver uiDriver = System.getProperty("host").equals("saucelabs")
-                ? SauceLabsUiDriver.getInstance()
-                : ChromeUiDriver.getInstance();
+        String host = System.getProperty("host");
+        UiDriver uiDriver;
+        if (host == null) {
+            uiDriver = ChromeUiDriver.getInstance();
+        } else if (host.equals("saucelabs")) {
+            uiDriver = SauceLabsUiDriver.getInstance();
+        } else {
+            uiDriver = ChromeUiDriver.getInstance();
+        }
         WebUiHost.getInstance(uiDriver);
     }
 
@@ -33,54 +44,55 @@ public abstract class GauntletTest {
     }
 
     @BeforeMethod(alwaysRun = true)
-    protected void storeTestName(Method method) {
-        this.method = method.getName();
+    protected void initializeTest(Method method) {
+        testName = method.getName();
+        System.out.printf("Executing %s...%n", testName);
     }
 
     @AfterMethod(alwaysRun = true)
     protected void terminateTest(ITestResult result) {
-//        System.out.println(result.getMethod());
-//        System.out.println(result.getName());
-//        System.out.println(Arrays.toString(result.getParameters()));
-//        System.out.println(result.getTestClass());
+        Object[] scenarios = result.getParameters();
+        scenarios = scenarios.length == 0 ? null : scenarios;
+        String feature = result.getTestClass().getRealClass().getSimpleName().replace("Tests", "");
+        for (String requirement : requirements) {
+//            reportManager.addRequirementTestEntry(testName, feature, scenarios, requirement);
+        }
         WebUiHost.quitInstance();
     }
 
     @AfterClass(alwaysRun = true)
     protected synchronized void reportClass() {
-        File reportFolder = new File("reports");
-        File[] reports = reportFolder.listFiles();
-        if (reports != null) {
-            for (File file : reports) {
-                file.delete();
-            }
-            reportFolder.delete();
-        }
-        boolean mkdir = reportFolder.mkdir();
-        File systemReport = new File("reports/system_coverage.rpt");
-        try {
-            FileUtils.writeStringToFile(systemReport, reportManager.getSystemCoverage(), StandardCharsets.UTF_8);
-            boolean newFile = systemReport.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        String coverageFolder = "build/reports/coverage";
+//        File systemReport = new File(String.format("%s/system/%s.system.rpt", coverageFolder, feature));
+//        File requirementsReport = new File(String.format("%s/requirements/%s.requirements.rpt", coverageFolder, feature));
+//        try {
+//            FileUtils.writeStringToFile(systemReport, reportManager.getSystemCoverage(), StandardCharsets.UTF_8);
+//            FileUtils.writeStringToFile(requirementsReport, reportManager.getRequirementsCoverage(), StandardCharsets.UTF_8);
+//            boolean newFile = systemReport.createNewFile();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     protected void then(Calibrator calibrator) {
         Assert.assertEquals(calibrator.calibrate(), Calibrator.SUCCESS);
     }
 
-    public class Application {
+    protected void addRequirements(String... requirements) {
+        this.requirements.addAll(Arrays.asList(requirements));
+    }
+
+    public static class Application {
         public static final String INSURANCE_APPLICATION = "insurance_application";
     }
 
-    public class View {
+    public static class View {
         public static final String ZIP_ROUTER = "zip_router";
         public static final String SHORT_FORM = "short_form";
         public static final String CONTACT = "contact";
     }
 
-    public class TestSuite {
+    public static class TestSuite {
         public static final String SMOKE = "smoke";
         public static final String ACCEPTANCE = "acceptance";
     }

@@ -22,8 +22,8 @@ public class SauceLabsUiDriver extends UiDriver {
         DesiredCapabilities capabilities;
         MutableCapabilities sauceOptions = new MutableCapabilities();
         String capturePerf = System.getProperty("capturePerf", "false");
-        sauceOptions.setCapability("username", "[username]");
-        sauceOptions.setCapability("accessKey", "[access_key]");
+        sauceOptions.setCapability("username", "sso-aaa-clublabs-qa-Vizovskiy.Andrey");
+        sauceOptions.setCapability("accessKey", "55fa27e6-6371-412f-a910-c5e65a0c7c4c");
         sauceOptions.setCapability("seleniumVersion", "3.141.59");
         sauceOptions.setCapability("name", "CraigsTest");
         sauceOptions.setCapability("recordScreenshots", "true");
@@ -43,7 +43,7 @@ public class SauceLabsUiDriver extends UiDriver {
         WebDriver driver = null;
         try {
             driver = new RemoteWebDriver(
-                    new URL("https://" + "[username]" + ":" + "[access_key]" + "@ondemand.us-west-1.saucelabs.com:443/wd/hub"),
+                    new URL("https://" + "sso-aaa-clublabs-qa-Vizovskiy.Andrey" + ":" + "55fa27e6-6371-412f-a910-c5e65a0c7c4c" + "@ondemand.us-west-1.saucelabs.com:443/wd/hub"),
                     capabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();

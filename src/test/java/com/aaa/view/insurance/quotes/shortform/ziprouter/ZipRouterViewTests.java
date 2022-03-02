@@ -17,6 +17,7 @@ public class ZipRouterViewTests extends GauntletTest {
 
     @Test(groups = {GauntletTest.TestSuite.SMOKE, TestSuite.ACCEPTANCE})
     public void smoke() {
+        addRequirements("US-999", "US-756");
         ZipRouterViewExpected expected = ZipRouterViewExpected.getInstance();
         ZipRouterView actual = ZipRouterView.directNav();
         then(ZipRouterViewCalibrator.getInstance(expected, actual));
@@ -24,6 +25,7 @@ public class ZipRouterViewTests extends GauntletTest {
 
     @Test(groups = {TestSuite.ACCEPTANCE}, dependsOnMethods = "smoke")
     public void directNav() {
+        addRequirements("US-999");
         ZipRouterViewExpected expected = ZipRouterViewExpected.getInstance();
         ZipRouterView actual = ZipRouterView.directNav();
         then(ZipRouterViewCalibrator.getInstance(expected, actual));
@@ -31,6 +33,7 @@ public class ZipRouterViewTests extends GauntletTest {
 
     @Test(groups = {TestSuite.ACCEPTANCE}, dataProvider = "scenarios", dependsOnMethods = "smoke")
     public void enterZipCode(String zipCode) {
+        addRequirements("US-664");
         ZipRouterViewExpected expected = ZipRouterViewExpected.getInstance(zipCode);
         ZipRouterView actual = ZipRouterView.directNav().enterZip(zipCode);
         then(ZipRouterViewCalibrator.getInstance(expected, actual));
