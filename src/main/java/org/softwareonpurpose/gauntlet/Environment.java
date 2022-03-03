@@ -20,6 +20,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Environment {
+    private static final String ENVIRONMENT_FILE_ACCESS_ERROR =
+            "Ensure system property 'env' is set (e.g., \"local\" for a 'local' environment), and 'resources' contains the matching file (e.g., \"local.env\"";
     private static Environment environment;
     private final Properties properties = new Properties();
 
@@ -35,16 +37,18 @@ public class Environment {
 
     /**
      * System Property 'env' is used to initialize Environment to resources/[env].properties
+     *
      * @return Environment
      */
     public static Environment getInstance() {
         if (environment == null) {
             String env = System.getProperty("env");
+            env = (env == null || env.isBlank()) ? "qa" : env;
             InputStream inputStream = null;
             try {
                 inputStream = Environment.class.getClassLoader().getResourceAsStream(String.format("%s.properties", env));
             } catch (Exception e) {
-                LoggerFactory.getLogger(Environment.class).error("System Property 'env' NOT SET (e.g. \"dev\" for a 'dev' environment)");
+                LoggerFactory.getLogger(Environment.class).error(ENVIRONMENT_FILE_ACCESS_ERROR);
             }
             environment = new Environment(inputStream);
         }
@@ -52,7 +56,7 @@ public class Environment {
     }
 
     static void clear() {
-        environment=null;
+        environment = null;
     }
 
     String getProperty(String key) {
@@ -60,6 +64,6 @@ public class Environment {
     }
 
     public String getDomainUrl() {
-        return "https://appuat1.ace.aaa.com/insurance/quotes/shortform";
+        return properties.getProperty("domain_url");
     }
 }
