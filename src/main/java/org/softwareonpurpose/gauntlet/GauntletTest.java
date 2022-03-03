@@ -53,25 +53,28 @@ public abstract class GauntletTest {
     protected void terminateTest(ITestResult result) {
         Object[] scenarios = result.getParameters();
         scenarios = scenarios.length == 0 ? null : scenarios;
-        String feature = result.getTestClass().getRealClass().getSimpleName().replace("Tests", "");
-        for (String requirement : requirements) {
-//            reportManager.addRequirementTestEntry(testName, feature, scenarios, requirement);
+        if (requirements.size() > 1) {
+            for (String requirement : requirements) {
+                reportManager.addRequirementTestEntry(testName, feature, scenarios, requirement);
+            }
+        } else {
+            reportManager.addTestEntry(testName, feature, scenarios);
         }
         WebUiHost.quitInstance();
     }
 
     @AfterClass(alwaysRun = true)
     protected synchronized void reportClass() {
-//        String coverageFolder = "build/reports/coverage";
-//        File systemReport = new File(String.format("%s/system/%s.system.rpt", coverageFolder, feature));
-//        File requirementsReport = new File(String.format("%s/requirements/%s.requirements.rpt", coverageFolder, feature));
-//        try {
-//            FileUtils.writeStringToFile(systemReport, reportManager.getSystemCoverage(), StandardCharsets.UTF_8);
-//            FileUtils.writeStringToFile(requirementsReport, reportManager.getRequirementsCoverage(), StandardCharsets.UTF_8);
-//            boolean newFile = systemReport.createNewFile();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        String coverageFolder = "build/reports/coverage";
+        File systemReport = new File(String.format("%s/system/%s.system.rpt", coverageFolder, feature));
+        File requirementsReport = new File(String.format("%s/requirements/%s.requirements.rpt", coverageFolder, feature));
+        try {
+            FileUtils.writeStringToFile(systemReport, reportManager.getSystemCoverage(), StandardCharsets.UTF_8);
+            FileUtils.writeStringToFile(requirementsReport, reportManager.getRequirementsCoverage(), StandardCharsets.UTF_8);
+            boolean newFile = systemReport.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void then(Calibrator calibrator) {
