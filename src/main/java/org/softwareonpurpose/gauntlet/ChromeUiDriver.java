@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class ChromeUiDriver extends UiDriver {
 
@@ -31,7 +32,6 @@ public class ChromeUiDriver extends UiDriver {
 
     @Override
     public org.openqa.selenium.chrome.ChromeDriver instantiateDriver() {
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors");
         return new org.openqa.selenium.chrome.ChromeDriver(options);
@@ -39,7 +39,7 @@ public class ChromeUiDriver extends UiDriver {
 
     @Override
     public void configureDriver(WebDriver driver) {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(getConfig().getTimeout()));
+        driver.manage().timeouts().implicitlyWait(getConfig().getTimeout(), TimeUnit.SECONDS);
     }
 
     @Override
