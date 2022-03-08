@@ -1,5 +1,8 @@
 package com.aaa.view.insurance.quotes.shortform.ziprouter;
 
+import com.aaa.view.insurance.quotes.data.user.ShortFormUser;
+import com.aaa.view.insurance.quotes.data.user.ShortFormUserDefinition;
+import com.aaa.view.insurance.quotes.data.user.ShortFormUserProvider;
 import org.softwareonpurpose.gauntlet.GauntletTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -9,9 +12,9 @@ public class ZipRouterViewTests extends GauntletTest {
     @DataProvider
     public static Object[][] scenarios() {
         return new Object[][]{
-                {"99999"}
-                ,{"9"}
-                ,{"9999"}
+                {ShortFormUserDefinition.getInstance().withZipCode("99999")}
+                , {ShortFormUserDefinition.getInstance().withZipCode("9")}
+                , {ShortFormUserDefinition.getInstance().withZipCode("9999")}
         };
     }
 
@@ -32,10 +35,11 @@ public class ZipRouterViewTests extends GauntletTest {
     }
 
     @Test(groups = {TestSuite.ACCEPTANCE}, dataProvider = "scenarios", dependsOnMethods = "smoke")
-    public void enterZipCode(String zipCode) {
+    public void enterInvalidZipCode(ShortFormUserDefinition userDefinition) {
         addRequirements("US-664");
-        ZipRouterViewExpected expected = ZipRouterViewExpected.getInstance(zipCode);
-        ZipRouterView actual = ZipRouterView.directNav().enterZip(zipCode);
+        ShortFormUser user = ShortFormUserProvider.getInstance().get(userDefinition);
+        ZipRouterViewExpected expected = ZipRouterViewExpected.getInstance(user.getZipCode());
+        ZipRouterView actual = ZipRouterView.directNav().enterZip(user.getZipCode());
         then(ZipRouterViewCalibrator.getInstance(expected, actual));
     }
 }

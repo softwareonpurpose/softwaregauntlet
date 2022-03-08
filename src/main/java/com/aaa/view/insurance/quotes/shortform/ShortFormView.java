@@ -1,6 +1,7 @@
 package com.aaa.view.insurance.quotes.shortform;
 
-import com.aaa.view.insurance.quotes.data.request.InsuranceRequest;
+import com.aaa.view.insurance.quotes.data.user.ShortFormUser;
+import com.aaa.view.insurance.quotes.data.user.ShortFormUserCalibratable;
 import com.aaa.view.insurance.quotes.shortform.contact.ContactView;
 import com.softwareonpurpose.uinavigator.UiElement;
 import com.softwareonpurpose.uinavigator.UiLocatorType;
@@ -61,9 +62,9 @@ public class ShortFormView extends UiView implements ShortFormViewCalibratable {
         return UiElement.getInstance("'Next' button", UiLocatorType.CLASS, "Button", "data-quid", "continue", this.getElement());
     }
 
-    public ContactView submit(InsuranceRequest insuranceRequest) {
-        setInsuranceType(insuranceRequest.getType());
-        setCurrentlyInsured(insuranceRequest.isCurrentlyInsured());
+    public ContactView submit(ShortFormUserCalibratable shortFormUser) {
+        setInsuranceType(shortFormUser.getType());
+        setCurrentlyInsured(shortFormUser.isCurrentlyInsured());
         clickNext();
         return UiView.expect(ContactView.class);
     }
