@@ -19,8 +19,11 @@ hs_err_pid*
 .idea/
 *.iml
 
-# Executable Files #
+# Windows Executable Files #
 *.exe
 
 # Coverage Report Files #
 *.rpt
+
+# Mac/Linux Executable Files #
+/src/main/resources/chromedriver
