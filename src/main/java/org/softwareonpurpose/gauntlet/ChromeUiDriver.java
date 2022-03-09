@@ -32,7 +32,6 @@ public class ChromeUiDriver extends UiDriver {
 
     @Override
     public org.openqa.selenium.chrome.ChromeDriver instantiateDriver() {
-
         String driverExtension = System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win") ? ".exe" : "";
         System.setProperty("webdriver.chrome.driver", String.format("%s/chromedriver%s", DRIVERS_PATH, driverExtension));
         ChromeOptions options = new ChromeOptions();
