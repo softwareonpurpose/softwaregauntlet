@@ -24,39 +24,25 @@ wrapper {
 }
 test {
     useTestNG()
-    String chromeDriverPath = "$projectDir/src/main/resources/chromedriver"
-    systemProperty "webdriver.chrome.driver", Os.isFamily(Os.FAMILY_WINDOWS) ? String.format("%s.exe", chromeDriverPath) : chromeDriverPath
 }
 //Suites
 task regression(type: Test) {
     useTestNG();
-    String chromeDriverPath = "$projectDir/src/main/resources/chromedriver"
-    systemProperty "webdriver.chrome.driver", Os.isFamily(Os.FAMILY_WINDOWS) ? String.format("%s.exe", chromeDriverPath) : chromeDriverPath
 }
 task smoke(type: Test) {
     useTestNG { includeGroups 'smoke' }
-    String chromeDriverPath = "$projectDir/src/main/resources/chromedriver"
-    systemProperty "webdriver.chrome.driver", Os.isFamily(Os.FAMILY_WINDOWS) ? String.format("%s.exe", chromeDriverPath) : chromeDriverPath
 }
 task acceptance(type: Test) {
     useTestNG { includeGroups 'acceptance' }
-    String chromeDriverPath = "$projectDir/src/main/resources/chromedriver"
-    systemProperty "webdriver.chrome.driver", Os.isFamily(Os.FAMILY_WINDOWS) ? String.format("%s.exe", chromeDriverPath) : chromeDriverPath
 }
 task release(type: Test) {
     useTestNG { includeGroups 'release' }
-    String chromeDriverPath = "$projectDir/src/main/resources/chromedriver"
-    systemProperty "webdriver.chrome.driver", Os.isFamily(Os.FAMILY_WINDOWS) ? String.format("%s.exe", chromeDriverPath) : chromeDriverPath
 }
 task debug(type: Test) {
     useTestNG { includeGroups 'debug' }
-    String chromeDriverPath = "$projectDir/src/main/resources/chromedriver"
-    systemProperty "webdriver.chrome.driver", Os.isFamily(Os.FAMILY_WINDOWS) ? String.format("%s.exe", chromeDriverPath) : chromeDriverPath
 }
 task deployment(type: Test) {
     useTestNG { includeGroups 'acceptance', 'release' }
-    String chromeDriverPath = "$projectDir/src/main/resources/chromedriver"
-    systemProperty "webdriver.chrome.driver", Os.isFamily(Os.FAMILY_WINDOWS) ? String.format("%s.exe", chromeDriverPath) : chromeDriverPath
 }
 
 tasks.withType(Test) {
