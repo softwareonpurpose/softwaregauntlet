@@ -1,6 +1,6 @@
 package org.softwareonpurpose.gauntlet;
 /*
-  Copyright 2020 Craig A. Stockton
+  Copyright 2020-2022 Craig A. Stockton
   <p/>
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -19,12 +19,12 @@ import com.softwareonpurpose.uinavigator.UiDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.time.Duration;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class ChromeUiDriver extends UiDriver {
-
     private static final String HOST_NAME = "chrome";
+    private static final String DRIVERS_PATH = "./src/main/resources";
 
     public static UiDriver getInstance() {
         return new ChromeUiDriver();
@@ -32,8 +32,11 @@ public class ChromeUiDriver extends UiDriver {
 
     @Override
     public org.openqa.selenium.chrome.ChromeDriver instantiateDriver() {
+
+        String driverExtension = System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win") ? ".exe" : "";
+        System.setProperty("webdriver.chrome.driver", String.format("%s/chromedriver%s", DRIVERS_PATH, driverExtension));
         ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors");
+        options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors");
         return new org.openqa.selenium.chrome.ChromeDriver(options);
     }
 
