@@ -23,10 +23,6 @@ public abstract class GauntletTest {
     private String testName;
     private List<String> requirements = new ArrayList<>();
 
-    protected GauntletTest() {
-        WebUiHost.getInstance(ChromeUiDriver.getInstance());
-    }
-
     @BeforeClass(alwaysRun = true)
     protected void initialize() {
         feature = this.getClass().getSimpleName().replace("Tests", "");
@@ -34,6 +30,7 @@ public abstract class GauntletTest {
 
     @BeforeMethod(alwaysRun = true)
     protected void initializeTest(Method method) {
+        driverInstantation();
         testName = method.getName();
         System.out.println(String.format("Executing %s...", testName));
     }
@@ -73,5 +70,9 @@ public abstract class GauntletTest {
 
     public static class TestSuite {
         public static final String SMOKE = "smoke";
+    }
+
+    protected void driverInstantation(){
+        WebUiHost.getInstance(ChromeUiDriver.getInstance());
     }
 }
