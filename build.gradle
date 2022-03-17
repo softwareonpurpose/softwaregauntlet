@@ -3,11 +3,15 @@ import org.apache.tools.ant.taskdefs.condition.Os
 plugins {
     id 'java'
 }
+
 group 'org.softwareonpurpose'
+
 version '2.0.0'
+
 repositories {
     mavenCentral()
 }
+
 dependencies {
     implementation 'org.testng:testng:7.5+'
     implementation 'commons-io:commons-io:2.11.0'
