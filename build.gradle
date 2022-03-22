@@ -16,7 +16,7 @@ dependencies {
     implementation 'org.seleniumhq.selenium:selenium-java:3.+'
     implementation files('./src/main/resources/coverage4test-3.0.0.jar')
     implementation files('./src/main/resources/uinavigator-3.0.3.jar')
-    implementation files('./src/main/resources/calibrator4test-1.5.1.jar')
+    implementation files('./src/main/resources/calibrator4test-1.5.3.jar')
     implementation files('./src/main/resources/indentmanager-1.0.7.jar')
 }
 wrapper {
