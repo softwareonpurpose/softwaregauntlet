@@ -40,6 +40,7 @@ public class Environment {
     public static Environment getInstance() {
         if (environment == null) {
             String env = System.getProperty("env");
+            env = (env == null) || env.isBlank() ? "local" : env;
             InputStream inputStream = null;
             try {
                 inputStream = Environment.class.getClassLoader().getResourceAsStream(String.format("%s.properties", env));

@@ -51,5 +51,6 @@ task deployment(type: Test) {
 
 tasks.withType(Test) {
     systemProperties['headless'] = System.properties.getAt("headless")
+    systemProperties['env'] = System.properties["env"]
     maxParallelForks = Runtime.runtime.availableProcessors() < 2 ? 1 : Runtime.runtime.availableProcessors() - 2
 }
