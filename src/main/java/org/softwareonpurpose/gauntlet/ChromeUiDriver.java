@@ -35,7 +35,10 @@ public class ChromeUiDriver extends UiDriver {
         String driverExtension = System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win") ? ".exe" : "";
         System.setProperty("webdriver.chrome.driver", String.format("%s/chromedriver%s", DRIVERS_PATH, driverExtension));
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors");
+        String runHeadless = System.getProperty("headless");
+        if (runHeadless.isBlank() || runHeadless.equals("true")) {
+            options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors");
+        }
         return new org.openqa.selenium.chrome.ChromeDriver(options);
     }
 

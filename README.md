@@ -6,7 +6,7 @@ In a PowerShell console, execute 'Install-GauntletWorkstation.ps1' found at the 
 It will require restarting the console multiple times to complete each install.
  - PowerShell (5.0)
  - Chocolatey
- - JDK9 (Java 1.9)
+ - JDK17
  - Git
  - PoshGit (powershell support for Git)
  - IntelliJ
@@ -14,7 +14,7 @@ It will require restarting the console multiple times to complete each install.
 # Onboarding (Mac)
 In a Terminal console, execute 'Install-Gauntlet-Mac.sh' found at the root of the repository.  
  - HomeBrew
- - JDK8 (Java 1.8)
+ - JDK17
  - Git
  - Gradle
  - IntelliJ
@@ -22,12 +22,21 @@ In a Terminal console, execute 'Install-Gauntlet-Mac.sh' found at the root of th
 Gradle may not be set in the Path so you will need to run: 'sudo chmod 755 gradlew' then ./gradlew clean should work.
 
 # Test Execution
+### In local environment
 In a console, in the project directory:
 
-    .\gradlew.bat clean [suite]
-**EXAMPLE** for Environment Validation Test (EVT):
+    ./gradlew clean [suite]
+**EXAMPLE** for Environment Validation Test (SMOKE):
 
-    .\gradlew.bat clean evt
+    ./gradlew clean smoke
+
+### In other environments
+In a console, in the project directory:
+
+    ./gradlew clean [suite] -Denv=[env]
+**EXAMPLE** for Environment Validation Test (SMOKE) in dev:
+
+    ./gradlew clean smoke -Denv=dev
 **NOTE:**
 On first execution, gradle will install necessary files before executing the build.  This is a one-time install.
 
@@ -38,11 +47,7 @@ The appropriate WebDriver executables MUST be added to main/resources.  By defau
  - DefaultFirefoxInstantiation for Mozilla Firefox
  - DefaultIeInstantiation for Microsoft InternetExplorer
 
-To utilize any of these configurations, simply put the appropriate WebDriver executable in src/main/resources, and in your code call UiHost.getInstance([DriverInstantiation]).  For example, in a @BeforeMethod, add the following:
-
-    UiHost.getInstance(DefaultChromeInstantiation.getInstance());
-
-For reference, these default configurations are located in the UiNavigator jar file under 'driver'.  To implement an alternate configuration of any of these browsers, OR to add support for a different browser or mobile device, implement a new DriverInstantiation.
+To implement an alternate configuration of any browser, implement a new DriverInstantiation.
 
 For example:
     
@@ -71,52 +76,52 @@ For example:
  - All other supporting components reside in src/main/java and are organized by the components they support, in hierarchical fashion
  
 # Test Structure
- - For each view, region or data model, the following files can be expected
-   - Interface
-     - all UI or data elements that can be analyzed
-     - all 'in[Region]' methods
-     - contains NO 'actions' or other methods
-   - Validator
-     - reconciles an Actual result with an Expected result
-     - all verifications to be executed
-     - all 'child' validators to be run
-   - View
-     - inherits a view interface
-     - 'actions' which result in a state or view transition
-       - click
-       - select
-       - login
-       - register
-       - edit
-       - etc.
-     - 'expect' called when an action performed that may result in a state change
-     - 'directNav' to load a view directly in the browser
-     - 'in[Region]' to return a particular 'Region' of a view
-        - inHeader
-        - inContent
-        - inFooter
-        - inTopNav
-        - etc.
+- For each view, region or data model, the following files can be expected
+    - Interface
+        - all UI or data elements that can be analyzed
+        - all 'in[Region]' methods
+        - contains NO 'actions' or other methods
+    - Calibrator (for validation)
+        - reconciles an Actual result with an Expected result
+        - all verifications to be executed
+        - all 'child' validators to be run
+    - View
+        - inherits a view interface
+        - 'actions' which result in a state or view transition
+            - click
+            - select
+            - login
+            - register
+            - edit
+            - etc.
+        - 'expect' called when an action performed that may result in a state change
+        - 'directNav' to load a view directly in the browser
+        - 'in[Region]' to return a particular 'Region' of a view
+            - inHeader
+            - inContent
+            - inFooter
+            - inTopNav
+            - etc.
     - Data
-      - inherits a test-appropriate data model interface
+        - inherits a test-appropriate data model interface
     - Expected
-      - inherits a view or data interface
-      - contains the business logic necessary to determine the expected value of all elements, based on provided data scenario
-  - Each test follows the following format:
+        - inherits a view or data interface
+        - contains the business logic necessary to determine the expected value of all elements, based on provided data scenario
+- Each test follows the following format:
     - Test data acquisition
-      - via a Test Data Provider
-      - either within the test method or via a TestNG DataProvider
-      - returns all data for a specific test scenario
+        - via a Test Data Provider
+        - either within the test method or via a TestNG DataProvider
+        - returns all data for a specific test scenario
     - Expected result determination
-      - expected classes contain detailed business logic used to determine specific expected results of all elements to be verified
+        - expected classes contain detailed business logic used to determine specific expected results of all elements to be verified
     - Actual result acquisition
-      - includes all steps to be performed
-        - shortest path possible to a view to be validated
-        - shortest path possible to an action that will cause a data transition
-      - as much as possible, all methods are chained for readability
-      
+        - includes all steps to be performed
+            - shortest path possible to a view to be validated
+            - shortest path possible to an action that will cause a data transition
+        - as much as possible, all methods are chained for readability
+
     - Validation
-      - always in the form of 
-      
-      `confirm(Validator.getInstance(expected, actual).validate());`
-      - executes all verifications for a given view or data element (e.g. for regions within a view) 
+        - always in the form of
+
+      `then(Calibrator.getInstance(expected, actual));`
+        - executes all verifications for a given view or data element (e.g. for regions within a view) 

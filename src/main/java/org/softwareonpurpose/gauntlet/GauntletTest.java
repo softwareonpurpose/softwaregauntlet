@@ -40,8 +40,12 @@ public abstract class GauntletTest {
         Object[] scenarios = result.getParameters();
         scenarios = scenarios.length == 0 ? null : scenarios;
         String feature = result.getTestClass().getRealClass().getSimpleName().replace("Tests", "");
-        for (String requirement : requirements) {
-            reportManager.addRequirementTestEntry(testName, feature, scenarios, requirement);
+        if (!requirements.isEmpty()) {
+            for (String requirement : requirements) {
+                reportManager.addRequirementTestEntry(testName, feature, scenarios, requirement);
+            }
+        } else {
+            reportManager.addTestEntry(testName, feature, scenarios);
         }
         WebUiHost.quitInstance();
     }
@@ -72,7 +76,7 @@ public abstract class GauntletTest {
         public static final String SMOKE = "smoke";
     }
 
-    protected void driverInstantation(){
+    protected void driverInstantation() {
         WebUiHost.getInstance(ChromeUiDriver.getInstance());
     }
 }
